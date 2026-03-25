@@ -11,7 +11,8 @@ obs_grid_simple(
   lon_max,
   lat_max,
   res = 0.1,
-  n_threads = 1L
+  n_threads = 1L,
+  npar = 1L
 )
 }
 \arguments{
@@ -34,14 +35,18 @@ the same value (square cells). Default \code{0.1}.}
 routine. Default \code{1L}. Increase for large particle sets
 (> ~50 000 rows); for smaller sets the thread-management
 overhead outweighs the gain.}
+
+\item{npar}{Number of particles used for normalization. The output
+grid is divided by this value to return the average footprint
+sensitivity. Default \code{1L}.}
 }
 \value{
 A named list with three elements:
 \describe{
   \item{\code{grid}}{Numeric matrix of dimension
     \code{[nlon x nlat]} containing the summed \code{foot}
-    per cell. Row \code{i} corresponds to \code{lon[i]},
-    column \code{j} to \code{lat[j]}.}
+    per cell, divided by \code{npar}. Row \code{i} corresponds
+    to \code{lon[i]}, column \code{j} to \code{lat[j]}.}
   \item{\code{lon}}{Numeric vector of cell-centre longitudes
     (length \code{nlon}).}
   \item{\code{lat}}{Numeric vector of cell-centre latitudes

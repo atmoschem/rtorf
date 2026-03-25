@@ -54,13 +54,16 @@ get_nt <- function() {
 #'   routine. Default \code{1L}. Increase for large particle sets
 #'   (> ~50 000 rows); for smaller sets the thread-management
 #'   overhead outweighs the gain.
+#' @param npar Number of particles used for normalization. The output
+#'   grid is divided by this value to return the average footprint
+#'   sensitivity. Default \code{1L}.
 #'
 #' @return A named list with three elements:
 #' \describe{
 #'   \item{\code{grid}}{Numeric matrix of dimension
 #'     \code{[nlon x nlat]} containing the summed \code{foot}
-#'     per cell. Row \code{i} corresponds to \code{lon[i]},
-#'     column \code{j} to \code{lat[j]}.}
+#'     per cell, divided by \code{npar}. Row \code{i} corresponds
+#'     to \code{lon[i]}, column \code{j} to \code{lat[j]}.}
 #'   \item{\code{lon}}{Numeric vector of cell-centre longitudes
 #'     (length \code{nlon}).}
 #'   \item{\code{lat}}{Numeric vector of cell-centre latitudes
@@ -101,7 +104,8 @@ obs_grid_simple <- function(
   lon_max,
   lat_max,
   res = 0.1,
-  n_threads = 1L
+  n_threads = 1L,
+  npar = 1L
 ) {
   stopifnot(
     is.data.frame(x),
@@ -130,7 +134,7 @@ obs_grid_simple <- function(
   )
 
   list(
-    grid = matrix(out$grid_out, nrow = nx, ncol = ny),
+    grid = matrix(out$grid_out, nrow = nx, ncol = ny) / npar,
     lon = lon_min + (seq_len(nx) - 0.5) * res,
     lat = lat_min + (seq_len(ny) - 0.5) * res
   )
@@ -185,6 +189,7 @@ obs_grid_simple <- function(
 #'   \code{bandwidth < 100}, which suggests degrees were passed
 #'   instead of metres.
 #' @param n_threads Number of OpenMP threads. Default \code{1L}.
+#' @param npar Number of particles for normalization. Default \code{1L}.
 #'
 #' @return A named list with the same structure as
 #'   \code{\link{obs_grid_simple}}:
@@ -247,7 +252,8 @@ obs_grid_kernel <- function(
   lat_res = 0.1,
   bandwidth = lon_res,
   use_haversine = FALSE,
-  n_threads = 1L
+  n_threads = 1L,
+  npar = 1L
 ) {
   stopifnot(
     is.data.frame(x),
@@ -294,7 +300,7 @@ obs_grid_kernel <- function(
   )
 
   list(
-    grid = matrix(out$grid_out, nrow = n_lon, ncol = n_lat),
+    grid = matrix(out$grid_out, nrow = n_lon, ncol = n_lat) / npar,
     lon = grid_lon,
     lat = grid_lat
   )

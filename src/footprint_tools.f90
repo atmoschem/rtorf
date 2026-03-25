@@ -145,27 +145,29 @@ contains
     real(8), intent(out):: grid_out(n_lon, n_lat)
 
     integer :: i, j, k, i_min, i_max, j_min, j_max
-    real(8) :: dist, dist_sq, weight, norm_factor
+    real(8) :: dist_sq, weight, norm_factor
     real(8) :: bw_sq, search_radius
     real(8) :: lat_range, lon_range, cos_lat, dx, dy
-    ! search_radius_sq has units matching the current distance mode;
-    ! it is computed inside the loop to avoid cross-mode bugs.
+    real(8) :: deg2m, cell_area
+    ! deg2m: factor to convert degree^2 to metres^2 at the equator
+    ! (R * pi / 180)^2
 
     grid_out    = 0.0d0
     norm_factor = 1.0d0 / (2.0d0 * pi * bandwidth**2)
     bw_sq       = bandwidth**2
     search_radius = 3.0d0 * bandwidth    ! 3σ truncation
+    deg2m       = (earth_radius * pi / 180.0d0)**2
 
     call omp_set_num_threads(n_threads)
 
     !$omp parallel do default(none) &
     !$omp private(i, j, k, i_min, i_max, j_min, j_max, &
     !$omp         lat_range, lon_range, cos_lat,         &
-    !$omp         dx, dy, dist, dist_sq, weight)         &
+    !$omp         dx, dy, dist_sq, weight, cell_area)    &
     !$omp shared(n_pts, lats, lons, foot, n_lon, n_lat,  &
     !$omp        grid_lon, grid_lat, lon_min, lat_min,   &
     !$omp        lon_res, lat_res, bandwidth, bw_sq,     &
-    !$omp        search_radius, norm_factor,             &
+    !$omp        search_radius, norm_factor, deg2m,      &
     !$omp        use_haversine, grid_out)
     do i = 1, n_pts
       if (foot(i) == 0.0d0) cycle
@@ -182,33 +184,36 @@ contains
         lon_range = search_radius
       end if
 
-      i_min = max(1,    int((lons(i) - lon_range - lon_min) / lon_res) + 1)
-      i_max = min(n_lon,int((lons(i) + lon_range - lon_min) / lon_res) + 1)
-      j_min = max(1,    int((lats(i) - lat_range - lat_min) / lat_res) + 1)
-      j_max = min(n_lat,int((lats(i) + lat_range - lat_min) / lat_res) + 1)
+      ! Use floor() to be consistent with grid_simple and safe for negative coords
+      i_min = max(1,     floor((lons(i) - lon_range - lon_min) / lon_res) + 1)
+      i_max = min(n_lon, floor((lons(i) + lon_range - lon_min) / lon_res) + 1)
+      j_min = max(1,     floor((lats(i) - lat_range - lat_min) / lat_res) + 1)
+      j_max = min(n_lat, floor((lats(i) + lat_range - lat_min) / lat_res) + 1)
 
       ! ---- Kernel accumulation over bounding box -------------
       do j = i_min, i_max
         do k = j_min, j_max
 
           if (use_haversine) then
-            dist    = haversine(lats(i), lons(i), grid_lat(k), grid_lon(j))
-            dist_sq = dist * dist
-            ! Guard in metres²
+            ! dist_sq in m^2
+            dist_sq = haversine(lats(i), lons(i), grid_lat(k), grid_lon(j))**2
             if (dist_sq > search_radius**2) cycle
+            ! area in m^2 = deg^2 * deg2m * cos(lat)
+            cell_area = lon_res * lat_res * deg2m * cos(grid_lat(k) * pi / 180.0d0)
           else
+            ! dist_sq in deg^2
             dx      = grid_lon(j) - lons(i)
             dy      = grid_lat(k) - lats(i)
             dist_sq = dx*dx + dy*dy
-            ! Guard in degrees²
             if (dist_sq > search_radius**2) cycle
+            ! area in deg^2
+            cell_area = lon_res * lat_res
           end if
 
-          ! Gaussian weight; multiply by cell area (degrees²) so that
+          ! Gaussian weight; multiply by cell area so that
           ! sum of weights over the window integrates to ~1,
           ! conserving total foot.
-          weight = norm_factor * dexp(-0.5d0 * dist_sq / bw_sq) &
-                 * lon_res * lat_res
+          weight = norm_factor * dexp(-0.5d0 * dist_sq / bw_sq) * cell_area
 
           !$omp atomic
           grid_out(j, k) = grid_out(j, k) + foot(i) * weight

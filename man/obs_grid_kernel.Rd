@@ -14,7 +14,8 @@ obs_grid_kernel(
   lat_res = 0.1,
   bandwidth = lon_res,
   use_haversine = FALSE,
-  n_threads = 1L
+  n_threads = 1L,
+  npar = 1L
 )
 }
 \arguments{
@@ -57,6 +58,8 @@ issued when \code{use_haversine = TRUE} and
 instead of metres.}
 
 \item{n_threads}{Number of OpenMP threads. Default \code{1L}.}
+
+\item{npar}{Number of particles for normalization. Default \code{1L}.}
 }
 \value{
 A named list with the same structure as
