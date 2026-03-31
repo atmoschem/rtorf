@@ -4,9 +4,10 @@ R Tools for Observations, Receptors and Footprints (rtorf)
 <img src="man/figures/logo.png" align="right" alt="" width="220" />
 
 ![GitHub commit
-activity](https://img.shields.io/github/commit-activity/y/noaa-gml/rtorf)
-[![R-CMD-check](https://github.com/noaa-gml/rtorf/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/noaa-gml/rtorf/actions/workflows/R-CMD-check.yaml)
-![GitHub Repo stars](https://img.shields.io/github/stars/noaa-gml/rtorf)
+activity](https://img.shields.io/github/commit-activity/y/ibarraespinosa/rtorf)
+[![R-CMD-check](https://github.com/ibarraespinosa/rtorf/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ibarraespinosa/rtorf/actions/workflows/R-CMD-check.yaml)
+![GitHub Repo
+stars](https://img.shields.io/github/stars/ibarraespinosa/rtorf)
 
 [NOAA Obspack](https://gml.noaa.gov/ccgg/obspack/) is a collection of
 greenhouse gases observations
@@ -19,14 +20,14 @@ parallel C, so it can be installed in any machine.
 Using git bash/powershell
 
 ``` bash
-git clone https://github.com/noaa-gml/rtorf
+git clone https://github.com/ibarraespinosa/rtorf
 R CMD INSTALL rtorf
 ```
 
 Using remotes R package
 
 ``` r
-remotes::install_github("noaa-gml/rtorf")
+remotes::install_github("ibarraespinosa/rtorf")
 ```
 
 ``` r
@@ -55,7 +56,7 @@ documentation of this function, the user must run `?obs_summary`.
 > We first define the categories
 
 ``` r
-cate = c(
+cate <- c(
   "aircraft-pfp",
   "aircraft-insitu",
   "aircraft-flask",
@@ -82,21 +83,21 @@ index <- obs_summary(obs = obs, categories = cate)
 For each one of these dataset ids, check the articles in the
 documentation
 
-<https://noaa-gml.github.io/rtorf/>
+<https://ibarraespinosa.github.io/rtorf/>
 
 e.g. for the `aircraft-pfp` we can read $CO_2$ and $CH_4$
-[here](https://noaa-gml.github.io/rtorf/articles/aircraft-pfp.html)
+[here](https://ibarraespinosa.github.io/rtorf/articles/aircraft-pfp.html)
 
 ## Implementation in python:
 
 I’m currently implementing a version in python
-[pytorf](https://github.com/noaa-gml/pytorf):
+[pytorf](https://github.com/ibarraespinosa/pytorf):
 
 ## Special thanks to all the
 
 **contributors**
 
-[![Contributors](https://contrib.rocks/image?repo=noaa-gml/rtorf)](https://github.com/noaa-gml/rtorf/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=ibarraespinosa/rtorf)](https://github.com/ibarraespinosa/rtorf/graphs/contributors)
 
 and
 
@@ -104,8 +105,8 @@ and
 
 <p>
 
-<a href="https://github.com/noaa-gml/rtorf/stargazers">
-<img src="http://reporoster.com/stars/dark/noaa-gml/rtorf"/> </a>
+<a href="https://github.com/ibarraespinosa/rtorf/stargazers">
+<img src="http://reporoster.com/stars/dark/ibarraespinosa/rtorf"/> </a>
 </p>
 
 ### Note about legacy code.

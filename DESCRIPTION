@@ -33,8 +33,8 @@ Imports:
     ncdf4
 SystemRequirements: netcdf (>=4.0)
 License: MIT + file LICENSE
-URL: https://github.com/noaa-gml/rtorf, https://noaa-gml.github.io/rtorf/
-BugReports: https://github.com/noaa-gml/rtorf/issues/
+URL: https://github.com/ibarraespinosa/rtorf, https://ibarraespinosa.github.io/rtorf/
+BugReports: https://github.com/ibarraespinosa/rtorf/issues/
 Encoding: UTF-8
 RoxygenNote: 7.3.3
 Date: 2026-03-30
