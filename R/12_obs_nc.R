@@ -188,3 +188,92 @@ obs_nc_get <- function(
     return(foot)
   }
 }
+
+#' obs_foot_flip
+#'
+#' Reorders the axes of a 3-D footprint array produced by
+#' \code{\link{obs_traj_foot}} so that its dimension order matches the
+#' CF-convention expected by \code{\link{obs_nc}} / \code{terra::rast()},
+#' or converts back in the opposite direction.
+#'
+#' \strong{Why this is needed.}
+#' \code{obs_traj_foot} returns an array with dimensions
+#' \code{[lat, lon, time]} (R row-major: row = latitude index).
+#' NetCDF files written with \code{obs_nc} preserve that order, but
+#' \code{terra::rast()} follows the CF / GIS convention where the
+#' \emph{first} spatial dimension is longitude (x-axis).  Reading the file
+#' back with \code{terra} therefore transposes the spatial plane, which is
+#' why a \code{t()} call was needed on the raster.
+#'
+#' Calling \code{obs_foot_flip(arr)} before passing the array to
+#' \code{obs_nc} (or after reading it back) resolves the mismatch without
+#' manual transposing.
+#'
+#' @param arr  A 3-D numeric array.  Two layouts are accepted:
+#'   \itemize{
+#'     \item \code{"traj"} (default) — \code{[lat, lon, time]} as produced
+#'       by \code{obs_traj_foot}.  Converted to \code{[lon, lat, time]}.
+#'     \item \code{"cf"} — \code{[lon, lat, time]} (CF / terra layout).
+#'       Converted back to \code{[lat, lon, time]}.
+#'   }
+#' @param from Character string, either \code{"traj"} or \code{"cf"}.
+#'   Describes the current axis order of \code{arr}.  Default \code{"traj"}.
+#' @param flip_lat Logical.  If \code{TRUE} (default) the latitude axis is
+#'   also reversed so that index 1 corresponds to the southern-most row,
+#'   matching the south-to-north order expected by CF tools and
+#'   \code{terra}.  Set to \code{FALSE} if the array is already in
+#'   south-to-north order.
+#' @param flip_lon Logical.  If \code{TRUE} (default) the longitude axis is
+#'   reversed so that index 1 corresponds to the western-most column.
+#'   Set to \code{FALSE} if the array is already in west-to-east order.
+#' @return A 3-D array with reordered (and optionally flipped) axes.
+#' @seealso \code{\link{obs_traj_foot}}, \code{\link{obs_nc}}
+#' @export
+#' @examples
+#' \dontrun{
+#' # foot.arr comes from obs_traj_foot: dims [lat, lon, time]
+#' foot_cf <- obs_foot_flip(foot.arr)       # now [lon, lat, time]
+#'
+#' obs_nc(
+#'   lat      = lats,
+#'   lon      = lons,
+#'   time_nc  = time_vec,
+#'   vars_out = "foot1",
+#'   units_out = "(ppb/nanomol m-2 s-1)",
+#'   nc_out   = "output.nc",
+#'   larrays  = list(foot1 = foot_cf)
+#' )
+#' # terra::rast("output.nc") now reads correctly without t()
+#' }
+obs_foot_flip <- function(
+  arr,
+  from = c("traj", "cf"),
+  flip_lat = TRUE,
+  flip_lon = TRUE
+) {
+  from <- match.arg(from)
+
+  if (!is.array(arr) || length(dim(arr)) != 3L) {
+    stop("arr must be a 3-dimensional array")
+  }
+
+  d <- dim(arr)
+
+  if (from == "traj") {
+    # Input:  [lat, lon, time]  ->  Output: [lon, lat, time]
+    nlat <- d[1L]
+    nlon <- d[2L]
+    lat_idx <- if (flip_lat) nlat:1L else seq_len(nlat)
+    lon_idx <- if (flip_lon) nlon:1L else seq_len(nlon)
+    out <- aperm(arr[lat_idx, lon_idx, , drop = FALSE], c(2L, 1L, 3L))
+  } else {
+    # Input:  [lon, lat, time]  ->  Output: [lat, lon, time]
+    nlon <- d[1L]
+    nlat <- d[2L]
+    lon_idx <- if (flip_lon) nlon:1L else seq_len(nlon)
+    lat_idx <- if (flip_lat) nlat:1L else seq_len(nlat)
+    out <- aperm(arr[lon_idx, lat_idx, , drop = FALSE], c(2L, 1L, 3L))
+  }
+
+  out
+}

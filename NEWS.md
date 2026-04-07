@@ -3,6 +3,7 @@
 ### rtorf 4.3.2 (Release date: 2026-04-07)
 
 rather obscure bug that reversed axis in obs_nc. Added tests
+add obs_foot_flip
 
 ### rtorf 4.3.1 (Release date: 2026-04-01)
 
