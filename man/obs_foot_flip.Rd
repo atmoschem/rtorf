@@ -4,7 +4,7 @@
 \alias{obs_foot_flip}
 \title{obs_foot_flip}
 \usage{
-obs_foot_flip(arr, from = c("traj", "cf"), flip_lat = TRUE, flip_lon = TRUE)
+obs_foot_flip(arr, from = c("traj", "cf"), flip_lat = FALSE, flip_lon = FALSE)
 }
 \arguments{
 \item{arr}{A 3-D numeric array.  Two layouts are accepted:

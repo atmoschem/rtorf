@@ -248,8 +248,8 @@ obs_nc_get <- function(
 obs_foot_flip <- function(
   arr,
   from = c("traj", "cf"),
-  flip_lat = TRUE,
-  flip_lon = TRUE
+  flip_lat = FALSE,
+  flip_lon = FALSE
 ) {
   from <- match.arg(from)
 
