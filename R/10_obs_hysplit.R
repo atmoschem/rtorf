@@ -251,11 +251,7 @@ obs_hysplit_control <- function(
   cat(sprintf("%#.1f", top_model_domain))
   cat("\n")
 
-  if (length(met) > 1) {
-    cat(paste(length(met), nmet))
-  } else {
-    cat(nmet)
-  }
+  cat(paste(length(met), nmet))
 
   cat("\n")
 
