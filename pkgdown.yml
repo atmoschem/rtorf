@@ -1,0 +1,20 @@
+pandoc: 3.8.3
+pkgdown: 2.2.0
+pkgdown_sha: ~
+articles:
+  aircore: aircore.html
+  aircraft-flask: aircraft-flask.html
+  aircraft-insitu: aircraft-insitu.html
+  aircraft-pfp: aircraft-pfp.html
+  hysplit: hysplit.html
+  shipboard-flask: shipboard-flask.html
+  shipoboard-insitu: shipoboard-insitu.html
+  summary: summary.html
+  surface-flask: surface-flask.html
+  surface-insitu: surface-insitu.html
+  surface-pfp: surface-pfp.html
+  tower-insitu: tower-insitu.html
+last_built: 2026-05-07T19:31Z
+urls:
+  reference: https://atmoschem.github.io/rtorf/reference
+  article: https://atmoschem.github.io/rtorf/articles

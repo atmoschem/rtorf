@@ -1,0 +1,97 @@
+# Package index
+
+## All functions
+
+- [`fex()`](https://atmoschem.github.io/rtorf/reference/fex.md) : File
+  extension
+- [`get_nt()`](https://atmoschem.github.io/rtorf/reference/get_nt.md) :
+  Check the max number of threads
+- [`obs_addltime()`](https://atmoschem.github.io/rtorf/reference/obs_addltime.md)
+  : add local time
+- [`obs_addmtime()`](https://atmoschem.github.io/rtorf/reference/obs_addmtime.md)
+  : Add matlab time
+- [`obs_addstime()`](https://atmoschem.github.io/rtorf/reference/obs_addstime.md)
+  : Add solar time
+- [`obs_addtime()`](https://atmoschem.github.io/rtorf/reference/obs_addtime.md)
+  : Add times
+- [`obs_agg()`](https://atmoschem.github.io/rtorf/reference/obs_agg.md)
+  : Aggregates Observations by time
+- [`obs_convolve()`](https://atmoschem.github.io/rtorf/reference/obs_convolve.md)
+  : obs_convolve
+- [`obs_find_receptors()`](https://atmoschem.github.io/rtorf/reference/obs_find_receptors.md)
+  : Compares expected receptors
+- [`obs_foot()`](https://atmoschem.github.io/rtorf/reference/obs_foot.md)
+  : obs_footprints
+- [`obs_foot_flip()`](https://atmoschem.github.io/rtorf/reference/obs_foot_flip.md)
+  : obs_foot_flip
+- [`obs_footname()`](https://atmoschem.github.io/rtorf/reference/obs_footname.md)
+  : Expected footprint name
+- [`obs_format()`](https://atmoschem.github.io/rtorf/reference/obs_format.md)
+  : Formatting data
+- [`obs_freq()`](https://atmoschem.github.io/rtorf/reference/obs_freq.md)
+  : return numeric vector in intervals
+- [`obs_grid()`](https://atmoschem.github.io/rtorf/reference/obs_grid.md)
+  : obs_grid
+- [`obs_grid_check()`](https://atmoschem.github.io/rtorf/reference/obs_grid_check.md)
+  : Conservation check for gridded footprints
+- [`obs_grid_cube()`](https://atmoschem.github.io/rtorf/reference/obs_grid_cube.md)
+  : 3D footprint gridding (lon, lat, time)
+- [`obs_grid_kernel()`](https://atmoschem.github.io/rtorf/reference/obs_grid_kernel.md)
+  : Gaussian kernel footprint gridding
+- [`obs_grid_simple()`](https://atmoschem.github.io/rtorf/reference/obs_grid_simple.md)
+  : Bin-and-sum footprint gridding
+- [`obs_hysplit_ascdata()`](https://atmoschem.github.io/rtorf/reference/obs_hysplit_ascdata.md)
+  : obs_hysplit_ascdata
+- [`obs_hysplit_control()`](https://atmoschem.github.io/rtorf/reference/obs_hysplit_control.md)
+  : obs_hysplit_control
+- [`obs_hysplit_control_read()`](https://atmoschem.github.io/rtorf/reference/obs_hysplit_control_read.md)
+  : obs_hysplit_control_read
+- [`obs_hysplit_setup()`](https://atmoschem.github.io/rtorf/reference/obs_hysplit_setup.md)
+  : obs_hysplit_setup
+- [`obs_id2pos()`](https://atmoschem.github.io/rtorf/reference/obs_id2pos.md)
+  : obs_id2pos
+- [`obs_info2id()`](https://atmoschem.github.io/rtorf/reference/obs_info2id.md)
+  : obs_info2id
+- [`obs_julian()`](https://atmoschem.github.io/rtorf/reference/obs_julian.md)
+  : obs_julian
+- [`obs_list.dt()`](https://atmoschem.github.io/rtorf/reference/obs_list.dt.md)
+  : list.dt
+- [`obs_meta()`](https://atmoschem.github.io/rtorf/reference/obs_meta.md)
+  : Read obspack metadata
+- [`obs_nc()`](https://atmoschem.github.io/rtorf/reference/obs_nc.md) :
+  obs_nc
+- [`obs_nc_get()`](https://atmoschem.github.io/rtorf/reference/obs_nc_get.md)
+  : obs_nc_get
+- [`obs_normalize_dmass()`](https://atmoschem.github.io/rtorf/reference/obs_normalize_dmass.md)
+  : obs_normalize_dmass
+- [`obs_out()`](https://atmoschem.github.io/rtorf/reference/obs_out.md)
+  : outersect
+- [`obs_plot()`](https://atmoschem.github.io/rtorf/reference/obs_plot.md)
+  : Read obspack metadata
+- [`obs_rbind()`](https://atmoschem.github.io/rtorf/reference/obs_rbind.md)
+  : rbind obspack
+- [`obs_read()`](https://atmoschem.github.io/rtorf/reference/obs_read.md)
+  : Read obspack (.txt)
+- [`obs_read_csvy()`](https://atmoschem.github.io/rtorf/reference/obs_read_csvy.md)
+  : reads CSVY
+- [`obs_read_nc()`](https://atmoschem.github.io/rtorf/reference/obs_read_nc.md)
+  : Read obspack (.nc)
+- [`obs_read_nc_att()`](https://atmoschem.github.io/rtorf/reference/obs_read_nc_att.md)
+  : Read obspack attributes (.nc)
+- [`obs_roundtime()`](https://atmoschem.github.io/rtorf/reference/obs_roundtime.md)
+  : round seconds from "POSIXct" "POSIXt" classes
+- [`obs_select_sec()`](https://atmoschem.github.io/rtorf/reference/obs_select_sec.md)
+  : Select Observations by closest time (seconds)
+- [`obs_summary()`](https://atmoschem.github.io/rtorf/reference/obs_summary.md)
+  [`obs_index()`](https://atmoschem.github.io/rtorf/reference/obs_summary.md)
+  : Summary of the ObsPack files (.txt)
+- [`obs_table()`](https://atmoschem.github.io/rtorf/reference/obs_table.md)
+  : Obspack Table Summary
+- [`obs_traj_foot()`](https://atmoschem.github.io/rtorf/reference/obs_traj_foot.md)
+  : obs_traj_foot
+- [`obs_trunc()`](https://atmoschem.github.io/rtorf/reference/obs_trunc.md)
+  : Trunc numbers with a desired number of decimals
+- [`obs_write_csvy()`](https://atmoschem.github.io/rtorf/reference/obs_write_csvy.md)
+  : Generates YAML and write data.frame
+- [`sr()`](https://atmoschem.github.io/rtorf/reference/sr.md) : Extacts
+  n last characters
