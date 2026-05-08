@@ -43,6 +43,7 @@
     <li><a class="dropdown-item" href="../articles/aircraft-insitu.html">aircraft-insitu</a></li>
     <li><a class="dropdown-item" href="../articles/aircraft-pfp.html">aircraft-pfp</a></li>
     <li><a class="dropdown-item" href="../articles/hysplit.html">hysplit</a></li>
+    <li><a class="dropdown-item" href="../articles/particle_grid.html">Particle</a></li>
     <li><a class="dropdown-item" href="../articles/shipboard-flask.html">shipboard-flask</a></li>
     <li><a class="dropdown-item" href="../articles/shipoboard-insitu.html">shipboard-insitu</a></li>
     <li><a class="dropdown-item" href="../articles/summary.html">summary</a></li>
@@ -533,9 +534,9 @@ max altitude was named <code>max_altitude</code>.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dfa</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span>,</span>
 <span>          <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">altitude_final</span><span class="op">)</span>,</span>
-<span>          by <span class="op">=</span> <span class="va">site_code</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>          by <span class="op">=</span> <span class="va">site_code</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dfa</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"max_altitude"</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dfa</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"max_altitude"</span></span>
 <span><span class="va">dfa</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;     site_code max_altitude</span></span>
 <span><span class="co">#&gt;        &lt;char&gt;        &lt;num&gt;</span></span>
@@ -654,7 +655,7 @@ that solar_time_cut, the column that it will be used to aggregate
 data</p>
 <p>How we filter for the required solar time, in this case 14.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df3</span> <span class="op">&lt;-</span> <span class="va">df2</span><span class="op">[</span><span class="va">hour_st</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">evening</span><span class="op">]</span></span>
+<code class="sourceCode R"><span><span class="va">df3</span> <span class="op">&lt;-</span> <span class="va">df2</span><span class="op">[</span><span class="va">hour_st</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html" class="external-link">%in%</a></span> <span class="va">evening</span><span class="op">]</span></span>
 <span><span class="va">df3</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solar_time"</span>, <span class="st">"solar_time_cut"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;                 solar_time      solar_time_cut</span></span>
 <span><span class="co">#&gt;                     &lt;POSc&gt;              &lt;char&gt;</span></span>
@@ -700,7 +701,7 @@ altitude by site.</p>
 <span><span class="va">df4</span><span class="op">[</span>,</span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"site_code"</span>,</span>
 <span>      <span class="st">"altitude_final"</span>,</span>
-<span>      <span class="st">"max_altitude"</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>      <span class="st">"max_altitude"</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;     site_code altitude_final max_altitude</span></span>
 <span><span class="co">#&gt;        &lt;char&gt;          &lt;num&gt;        &lt;num&gt;</span></span>
 <span><span class="co">#&gt;  1:       ABT          33.00        33.00</span></span>
@@ -763,8 +764,8 @@ with 4 digits</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">master</span><span class="op">$</span><span class="va">timeUTC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">master</span><span class="op">$</span><span class="va">timeUTC</span><span class="op">)</span></span>
 <span><span class="va">master</span><span class="op">$</span><span class="va">local_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">master</span><span class="op">$</span><span class="va">local_time</span><span class="op">)</span></span>
-<span><span class="va">master</span><span class="op">$</span><span class="va">latitude</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">master</span><span class="op">$</span><span class="va">latitude</span>, <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="va">master</span><span class="op">$</span><span class="va">longitude</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">master</span><span class="op">$</span><span class="va">longitude</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">master</span><span class="op">$</span><span class="va">latitude</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/math-generics.html" class="external-link">round</a></span><span class="op">(</span><span class="va">master</span><span class="op">$</span><span class="va">latitude</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">master</span><span class="op">$</span><span class="va">longitude</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/math-generics.html" class="external-link">round</a></span><span class="op">(</span><span class="va">master</span><span class="op">$</span><span class="va">longitude</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="save-master">Save master<a class="anchor" aria-label="anchor" href="#save-master"></a>
@@ -931,7 +932,7 @@ files. Now we filter selected columns</p>
 <span>                     <span class="st">"time_decimal"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <p>We can round altitude also</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">receptor</span><span class="op">$</span><span class="va">altitude_final</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">receptor</span><span class="op">$</span><span class="va">altitude_final</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">receptor</span><span class="op">$</span><span class="va">altitude_final</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/math-generics.html" class="external-link">round</a></span><span class="op">(</span><span class="va">receptor</span><span class="op">$</span><span class="va">altitude_final</span><span class="op">)</span></span></code></pre></div>
 <p>Now we can format time variables with two digits</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">receptor</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/obs_format.html">obs_format</a></span><span class="op">(</span><span class="va">receptor</span>,</span>
@@ -943,7 +944,7 @@ files. Now we filter selected columns</p>
 <span><span class="va">receptor_asl</span> <span class="op">&lt;-</span> <span class="va">receptor</span><span class="op">[</span><span class="va">type_altitude</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span></span></code></pre></div>
 <p>Finally, we save the receptors</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">receptor_agl</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">receptor_agl</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">out</span>, <span class="st">"_"</span>, <span class="va">datasetid</span>, <span class="st">"_receptor_AGL.txt"</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fwrite.html" class="external-link">fwrite</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">receptor_agl</span>,</span>
@@ -951,7 +952,7 @@ files. Now we filter selected columns</p>
 <span>         sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">receptor_asl</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">receptor_asl</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">out</span>, <span class="st">"_"</span>, <span class="va">datasetid</span>, <span class="st">"_receptor_ASL.txt"</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fwrite.html" class="external-link">fwrite</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">receptor_asl</span>,</span>
@@ -983,7 +984,7 @@ files. Now we filter selected columns</p>
 <span>    .SDcols <span class="op">=</span> <span class="st">"value"</span>,</span>
 <span>    by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">latitude</span>, <span class="va">longitude</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">dx</span>, coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"longitude"</span>, <span class="st">"latitude"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="st">"value"</span><span class="op">]</span>, axes <span class="op">=</span> <span class="cn">T</span>, reset <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="st">"value"</span><span class="op">]</span>, axes <span class="op">=</span> <span class="cn">T</span>, reset <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="fu">maps</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html" class="external-link">map</a></span><span class="op">(</span>add <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
 <img src="https://github.com/ibarraespinosa/rtorf/blob/main/man/figures/obsplot_surfaceinsitu_map.png?raw=true" alt="Map"><div class="figcaption">Map</div>
@@ -1000,7 +1001,7 @@ files. Now we filter selected columns</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

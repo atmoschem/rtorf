@@ -1,0 +1,159 @@
+# Particle
+
+``` r
+library(colorout)
+library(data.table)
+library(rtorf)
+library(terra)
+#> terra 1.9.1
+#> 
+#> Attaching package: 'terra'
+#> The following object is masked from 'package:data.table':
+#> 
+#>     shift
+library(tidyterra)
+#> 
+#> Attaching package: 'tidyterra'
+#> The following object is masked from 'package:stats':
+#> 
+#>     filter
+library(ggplot2)
+library(cptcity)
+library(ggmap)
+#> ℹ Google's Terms of Service: <https://mapsplatform.google.com>
+#>   Stadia Maps' Terms of Service: <https://stadiamaps.com/terms-of-service>
+#>   OpenStreetMap's Tile Usage Policy: <https://operations.osmfoundation.org/policies/tiles>
+#> ℹ Please cite ggmap if you use it! Use `citation("ggmap")` for details.
+#> 
+#> Attaching package: 'ggmap'
+#> The following object is masked from 'package:terra':
+#> 
+#>     inset
+library(sf)
+#> Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.4.0; sf_use_s2() is TRUE
+# get coordinates
+```
+
+``` r
+register_google("key")
+r <- rast()
+coords <- as.vector(st_coordinates(st_centroid(st_as_sfc(st_bbox(r)))))
+hdf <- get_map(location = coords, zoom = 1)
+```
+
+Read PARTICLE.DAT
+
+``` r
+x <- fread("2022x01x19x00x00x00x21.0000Sx055.0000Ex05000/PARTICLE.DAT")
+```
+
+Identify time of receptor:
+
+``` r
+receptor_run_time <- as.POSIXct(
+  "2022x01x19x18x00x00",
+  format = "%Yx%mx%dx%Hx%Mx%S",
+  tz = "UTC"
+)
+```
+
+Check number of particle to normalize
+
+``` r
+npar_val <- x[, length(unique(index))]
+```
+
+Prepare for [obs_grid_cube](https://atmoschem.github.io/rtorf/articles/)
+
+``` r
+x[, time_receptor := receptor_run_time]
+grid_res <- 1 # 1 degrees
+grid_xmin <- -180
+grid_ymin <- -90
+grid_xmax <- 180
+grid_ymax <- 90
+nx <- round((grid_xmax - grid_xmin) / grid_res) # 800
+ny <- round((grid_ymax - grid_ymin) / grid_res) # 650
+nt <- 24 * 2 * 7
+message(sprintf(
+  "Grid: %d x %d x %d = %s doubles (~%.0f MB per call)",
+  nx,
+  ny,
+  nt,
+  format(nx * ny * nt, big.mark = ","),
+  nx * ny * nt * 8 / 1024^2
+))
+
+obs_grid_cube(
+  x = x,
+  lon_min = grid_xmin,
+  lat_min = grid_ymin,
+  lon_max = grid_xmax,
+  lat_max = grid_ymax,
+  res = grid_res,
+  nt = nt,
+  npar = npar_val,
+  n_threads = 6L
+) -> gx
+```
+
+we get ready for plot inputs
+
+``` r
+g_simple <- apply(gx$grid, 1:2, sum)
+my_ext <- c(-180, 180, -90, 90)
+mrr_gs <- rast(nrows = 180, ncols = 360, extent = my_ext, crs = "EPSG:4326")
+values(mrr_gs) <- g_simple
+mrr_gs[] <- ifelse(mrr_gs[] <= 0, NA, mrr_gs[])
+mrr_gs <- terra::flip(mrr_gs)
+```
+
+``` r
+ggmap(hdf, extent = "normal") +
+  geom_spatraster(data = mrr_gs) +
+  scale_fill_gradientn(
+    colours = cpt(rev = T),
+    values = c(0, 0.05, 1),
+    na.value = "transparent"
+  ) +
+  coord_sf(datum = NA) +
+  labs(
+    x = NULL,
+    y = NULL,
+    subtitle = paste0(
+      "rtorf::obs_grid_cube simple sum: ",
+      round(sum(mrr_gs[], na.rm = T), 2)
+    )
+  ) +
+  theme_bw()
+```
+
+![](https://i.imgur.com/TC3I7QA.png)
+
+Now check with con2cdf4
+
+``` r
+mrr_gs <- rast("2022x01x19x00x00x00x21.0000Sx055.0000Ex05000/out.nc")
+mrr_gs <- sum(mrr_gs)
+g_simple <- apply(gx$grid, 1:2, sum)
+mrr_gs[] <- ifelse(mrr_gs[] <= 0, NA, mrr_gs[])
+ggmap(hdf, extent = "normal") +
+  geom_spatraster(data = mrr_gs) +
+  scale_fill_gradientn(
+    colours = cpt(rev = T),
+    values = c(0, 0.05, 1),
+    na.value = "transparent"
+  ) +
+  coord_sf(datum = NA) +
+  labs(
+    x = NULL,
+    y = NULL,
+    subtitle = paste0(
+      "con2cdf4 simple sum: ",
+      round(sum(mrr_gs[], na.rm = T), 2)
+    )
+  ) +
+  theme_bw()
+```
+
+![](https://i.imgur.com/qmuqwxE.png)

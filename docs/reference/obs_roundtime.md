@@ -1,0 +1,52 @@
+# round seconds from "POSIXct" "POSIXt" classes
+
+return rounded seconds from time
+
+## Usage
+
+``` r
+obs_roundtime(x, n = 10)
+```
+
+## Arguments
+
+- x:
+
+  time as "POSIXct" "POSIXt"
+
+- n:
+
+  factor
+
+## Value
+
+numeric vector
+
+## See also
+
+Other helpers:
+[`fex()`](https://atmoschem.github.io/rtorf/reference/fex.md),
+[`obs_footname()`](https://atmoschem.github.io/rtorf/reference/obs_footname.md),
+[`obs_format()`](https://atmoschem.github.io/rtorf/reference/obs_format.md),
+[`obs_freq()`](https://atmoschem.github.io/rtorf/reference/obs_freq.md),
+[`obs_list.dt()`](https://atmoschem.github.io/rtorf/reference/obs_list.dt.md),
+[`obs_out()`](https://atmoschem.github.io/rtorf/reference/obs_out.md),
+[`obs_rbind()`](https://atmoschem.github.io/rtorf/reference/obs_rbind.md),
+[`obs_read_csvy()`](https://atmoschem.github.io/rtorf/reference/obs_read_csvy.md),
+[`obs_trunc()`](https://atmoschem.github.io/rtorf/reference/obs_trunc.md),
+[`obs_write_csvy()`](https://atmoschem.github.io/rtorf/reference/obs_write_csvy.md),
+[`rtorf-deprecated`](https://atmoschem.github.io/rtorf/reference/rtorf-deprecated.md),
+[`sr()`](https://atmoschem.github.io/rtorf/reference/sr.md)
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Do not run
+x <- Sys.time() + seq(1, 55, 1)
+paste0(x,"  ",
+       obs_roundtime(x), "  ",
+       obs_freq(data.table::second(x),
+                seq(0, 55, 10)))
+} # }
+```
