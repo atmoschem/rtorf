@@ -7,6 +7,7 @@
 - [aircraft-insitu](https://atmoschem.github.io/rtorf/articles/aircraft-insitu.md):
 - [aircraft-pfp](https://atmoschem.github.io/rtorf/articles/aircraft-pfp.md):
 - [hysplit](https://atmoschem.github.io/rtorf/articles/hysplit.md):
+- [Particle](https://atmoschem.github.io/rtorf/articles/particle_grid.md):
 - [shipboard-flask](https://atmoschem.github.io/rtorf/articles/shipboard-flask.md):
 - [shipboard-insitu](https://atmoschem.github.io/rtorf/articles/shipoboard-insitu.md):
 - [summary](https://atmoschem.github.io/rtorf/articles/summary.md):

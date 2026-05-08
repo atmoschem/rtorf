@@ -40,7 +40,7 @@ utils::packageVersion("rtorf")
 ## [1] '4.3.2'
 ```
 
-(Currently addidng r-universe) \## ObsPack summary
+## ObsPack summary
 
 The first step consists in constructing a summary for ObsPack (CH4, CO2
 or other). This is required to read the data, but also, identify `agl`,
@@ -227,6 +227,7 @@ tasks.
 - [aircraft-insitu](https://atmoschem.github.io/rtorf/articles/aircraft-insitu.md):
 - [aircraft-pfp](https://atmoschem.github.io/rtorf/articles/aircraft-pfp.md):
 - [hysplit](https://atmoschem.github.io/rtorf/articles/hysplit.md):
+- [Particle](https://atmoschem.github.io/rtorf/articles/particle_grid.md):
 - [shipboard-flask](https://atmoschem.github.io/rtorf/articles/shipboard-flask.md):
 - [shipboard-insitu](https://atmoschem.github.io/rtorf/articles/shipoboard-insitu.md):
 - [summary](https://atmoschem.github.io/rtorf/articles/summary.md):

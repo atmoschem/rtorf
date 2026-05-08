@@ -40,7 +40,7 @@ utils::packageVersion("rtorf")
 ## [1] '4.3.2'
 ```
 
-(Currently addidng r-universe) \## ObsPack summary
+## ObsPack summary
 
 The first step consists in constructing a summary for ObsPack (CH4, CO2
 or other). This is required to read the data, but also, identify `agl`,

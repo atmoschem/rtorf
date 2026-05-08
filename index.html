@@ -46,6 +46,7 @@
     <li><a class="dropdown-item" href="articles/aircraft-insitu.html">aircraft-insitu</a></li>
     <li><a class="dropdown-item" href="articles/aircraft-pfp.html">aircraft-pfp</a></li>
     <li><a class="dropdown-item" href="articles/hysplit.html">hysplit</a></li>
+    <li><a class="dropdown-item" href="articles/particle_grid.html">Particle</a></li>
     <li><a class="dropdown-item" href="articles/shipboard-flask.html">shipboard-flask</a></li>
     <li><a class="dropdown-item" href="articles/shipoboard-insitu.html">shipboard-insitu</a></li>
     <li><a class="dropdown-item" href="articles/summary.html">summary</a></li>
@@ -92,7 +93,10 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span>
 <span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"rtorf"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="do">## [1] '4.3.2'</span></span></code></pre></div>
-<p>(Currently addidng r-universe) ## ObsPack summary</p>
+</div>
+<div class="section level2">
+<h2 id="obspack-summary">ObsPack summary<a class="anchor" aria-label="anchor" href="#obspack-summary"></a>
+</h2>
 <p>The first step consists in constructing a summary for ObsPack (CH4, CO2 or other). This is required to read the data, but also, identify <code>agl</code>, which is present in some of the file names. This function returns a <code>data.frame</code>. Optionally, the user can indicate a path to store the <code>data.frame</code>. <code>obs_summary</code> also prints a summary of the data. The second argument is the categories, and by default includes the categories shown below, to account for all the files. Then the summary <code>data.frame</code> contains the columns <code>id</code> as the full path to each file, <code>name</code> which is the name or relative path of the file, <code>n</code> just an id, <code>sector</code> such as tower, and the column <code>agl</code> which indicates the <code>agl</code> indicated in the name of the file if available. To read the documentation of this function, the user must run <code><a href="reference/obs_summary.html">?obs_summary</a></code>.</p>
 <blockquote>
 <p>We first define the categories</p>
