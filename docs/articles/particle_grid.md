@@ -1,36 +1,20 @@
 # Particle
 
 ``` r
+library(rtorf)
+library(data.table)
+```
+
+``` r
 library(colorout)
 library(data.table)
 library(rtorf)
 library(terra)
-#> terra 1.9.1
-#> 
-#> Attaching package: 'terra'
-#> The following object is masked from 'package:data.table':
-#> 
-#>     shift
 library(tidyterra)
-#> 
-#> Attaching package: 'tidyterra'
-#> The following object is masked from 'package:stats':
-#> 
-#>     filter
 library(ggplot2)
 library(cptcity)
 library(ggmap)
-#> ℹ Google's Terms of Service: <https://mapsplatform.google.com>
-#>   Stadia Maps' Terms of Service: <https://stadiamaps.com/terms-of-service>
-#>   OpenStreetMap's Tile Usage Policy: <https://operations.osmfoundation.org/policies/tiles>
-#> ℹ Please cite ggmap if you use it! Use `citation("ggmap")` for details.
-#> 
-#> Attaching package: 'ggmap'
-#> The following object is masked from 'package:terra':
-#> 
-#>     inset
 library(sf)
-#> Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.4.0; sf_use_s2() is TRUE
 # get coordinates
 ```
 

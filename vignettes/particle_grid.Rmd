@@ -17,6 +17,12 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
+library(rtorf)
+library(data.table)
+```
+
+
+```{r, eval = F}
 library(colorout)
 library(data.table)
 library(rtorf)
