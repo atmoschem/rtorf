@@ -26,13 +26,13 @@ for the period 1983-2021.NOAA - Global Monitoring Laboratory,
     }
 
 Ibarra-Espinosa S (2026). *rtorf: Observations, Footprints and Receptors
-('rtorf') and HYSPLIT Configuration Tools*. R package version 4.3.2,
+('rtorf') and HYSPLIT Configuration Tools*. R package version 4.4.0,
 <https://github.com/ibarraespinosa/rtorf>.
 
     @Manual{,
       title = {rtorf: Observations, Footprints and Receptors ('rtorf') and HYSPLIT Configuration Tools},
       author = {Sergio Ibarra-Espinosa},
       year = {2026},
-      note = {R package version 4.3.2},
+      note = {R package version 4.4.0},
       url = {https://github.com/ibarraespinosa/rtorf},
     }
