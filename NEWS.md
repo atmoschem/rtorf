@@ -1,5 +1,9 @@
 # NEWS
 
+### rtorf 4.4.0 (Release date: 2026-07-10)
+
+-   Add obs_ict to read and merge all ict files in a directory.
+
 ### rtorf 4.3.2 (Release date: 2026-04-07)
 
 rather obscure bug that reversed axis in obs_nc. Added tests

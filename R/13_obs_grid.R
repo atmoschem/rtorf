@@ -262,7 +262,6 @@ obs_grid_cube <- function(
 }
 
 
-
 # ------------------------------------------------------------
 #  obs_grid_kernel
 # ------------------------------------------------------------
@@ -422,7 +421,8 @@ obs_grid_kernel <- function(
   )
 
   list(
-    grid = matrix(out$grid_out, nrow = n_lat, ncol = n_lon, byrow = FALSE) / npar,
+    grid = matrix(out$grid_out, nrow = n_lat, ncol = n_lon, byrow = FALSE) /
+      npar,
     lon = grid_lon,
     lat = grid_lat
   )

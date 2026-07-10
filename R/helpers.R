@@ -522,3 +522,28 @@ fex <- function(x) {
 sr <- function(x, n) {
   substr(x, nchar(x) - n + 1, nchar(x))
 }
+
+
+#' @title Read and merges all ict files
+#' @family helpers
+#' @name obs_ict
+#' @description reads all ict files in a directory and merges them into a single data.table
+#' @param f vector of ICT files.
+#' @param h character to identify end of metadata and start of header, default is "QA".
+#' @return data.table with all ict data.
+#' @importFrom data.table rbindlist
+#' @importFrom data.table fread
+#' @export
+#' @examples \dontrun{
+#' # do not run
+#' }
+obs_ict <- function(f, h = "QA") {
+  dt <- lapply(seq_along(f), function(i) {
+    nr <- readLines(f[i], n = 1000)
+    l1 <- grep(h, nr)[1]
+    dt <- data.table::fread(file = f[i], skip = l1, header = TRUE)
+    dt$id <- i
+    return(dt)
+  })
+  data.table::rbindlist(dt)
+}
