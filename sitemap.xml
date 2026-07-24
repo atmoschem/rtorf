@@ -40,6 +40,9 @@
 <url><loc>https://atmoschem.github.io/rtorf/reference/obs_grid_kernel.html</loc></url>
 <url><loc>https://atmoschem.github.io/rtorf/reference/obs_grid_simple.html</loc></url>
 <url><loc>https://atmoschem.github.io/rtorf/reference/obs_hysplit_ascdata.html</loc></url>
+<url><loc>https://atmoschem.github.io/rtorf/reference/obs_hysplit_cdump2nc.html</loc></url>
+<url><loc>https://atmoschem.github.io/rtorf/reference/obs_hysplit_cdump_nc.html</loc></url>
+<url><loc>https://atmoschem.github.io/rtorf/reference/obs_hysplit_cdump_read.html</loc></url>
 <url><loc>https://atmoschem.github.io/rtorf/reference/obs_hysplit_control.html</loc></url>
 <url><loc>https://atmoschem.github.io/rtorf/reference/obs_hysplit_control_read.html</loc></url>
 <url><loc>https://atmoschem.github.io/rtorf/reference/obs_hysplit_setup.html</loc></url>

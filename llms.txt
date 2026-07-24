@@ -164,6 +164,12 @@ tasks.
   : Bin-and-sum footprint gridding
 - [`obs_hysplit_ascdata()`](https://atmoschem.github.io/rtorf/reference/obs_hysplit_ascdata.md)
   : obs_hysplit_ascdata
+- [`obs_hysplit_cdump2nc()`](https://atmoschem.github.io/rtorf/reference/obs_hysplit_cdump2nc.md)
+  : Convert a HYSPLIT cdump file to CF-compliant NetCDF
+- [`obs_hysplit_cdump_nc()`](https://atmoschem.github.io/rtorf/reference/obs_hysplit_cdump_nc.md)
+  : Write HYSPLIT concentrations as a CF-compliant NetCDF
+- [`obs_hysplit_cdump_read()`](https://atmoschem.github.io/rtorf/reference/obs_hysplit_cdump_read.md)
+  : Read a HYSPLIT binary concentration file (cdump)
 - [`obs_hysplit_control()`](https://atmoschem.github.io/rtorf/reference/obs_hysplit_control.md)
   : obs_hysplit_control
 - [`obs_hysplit_control_read()`](https://atmoschem.github.io/rtorf/reference/obs_hysplit_control_read.md)
