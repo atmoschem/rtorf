@@ -20,3 +20,4 @@
 ^logo$
 ^[.]?air[.]toml$
 ^\.vscode$
+^\.git-corrupt$

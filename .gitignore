@@ -9,3 +9,8 @@ inst/doc
 
 /.quarto/
 rtorf.Rcheck/
+src/*.o
+src/*.mod
+src/*.so
+src/*.dll
+src/*.dylib
