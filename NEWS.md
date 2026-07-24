@@ -1,5 +1,9 @@
 # NEWS
 
+### rtorf 4.5.0 (Release date: 2026-07-24)
+
+add obs_hysplit_cdump_read, obs_hysplit_cdump_nc and obs_hysplit_cdump2nc to read HYSPLIT binary concentration files (cdump) and write CF-compliant NetCDF with dimensions (time, z, y, x)
+
 ### rtorf 4.4.0 (Release date: 2026-07-10)
 
 -   Add obs_ict to read and merge all ict files in a directory.
