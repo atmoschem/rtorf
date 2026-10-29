@@ -35,43 +35,43 @@ obs_plot <- function(dt,
                      yfactor = 1,
                      colu = "site_code",
                      type = "p",
-                     n = if(length(unique(dt[[colu]])) == 1) unique(dt[[colu]]) else unique(dt[[colu]])[1:2] ,
+                     n = if (length(unique(dt[[colu]])) == 1) unique(dt[[colu]]) else unique(dt[[colu]])[1:2],
                      pal = cptcity::find_cpt("qual")[6],
                      verbose = TRUE,
                      xlab = "time",
                      ylab = "value",
                      xlim = range(dt[[time]], na.rm = TRUE),
                      ylim = range(dt[[y]], na.rm = TRUE),
-                     ...){
+                     ...) {
 
   oldpar <- graphics::par(no.readonly = TRUE)       # code line i
   on.exit(graphics::par(oldpar))                    # code line i + 1
 
   dt <- data.table::as.data.table(dt)
-  dt[[y]] <- dt[[y]]*yfactor
+  dt[[y]] <- dt[[y]] * yfactor
   value <- NULL
   nmiss <- nrow(dt[is.na(value)])
 
-  if(nmiss > 0) if(verbose) cat("Found ", nmiss, "missing `value` on dt\n")
+  if (nmiss > 0) if (verbose) cat("Found ", nmiss, "missing `value` on dt\n")
 
   dt <- dt[!is.na(value)]
 
-  if(length(colu) > 1) stop("column must be unique name ")
+  if (length(colu) > 1) stop("column must be unique name ")
 
   usi <- unique(dt[[colu]])
-  if(verbose){
-  cat("Found the following sites: \n")
-  print(usi, quote = FALSE)
+  if (verbose) {
+    cat("Found the following sites: \n")
+    print(usi, quote = FALSE)
   }
-  if(length(n) >= length(usi)){
-   nn <- usi
+  if (length(n) >= length(usi)) {
+    nn <- usi
   } else {
     nn <- n
   }
 
-  if(verbose) {
-  cat("Plotting the following sites: \n")
-  print(n, quote = FALSE)
+  if (verbose) {
+    cat("Plotting the following sites: \n")
+    print(n, quote = FALSE)
   }
 
   dt <- dt[dt[[colu]] %in% n]
@@ -79,61 +79,61 @@ obs_plot <- function(dt,
   lx <- split(dt, dt[[colu]])
 
   colores <- cptcity::cpt(pal,
-                          n = length(lx))
+    n = length(lx))
 
   par(mar = c(5, 4, 1.4, 0.2))
 
   plot(x = lx[[1]][[time]],
-       y = lx[[1]][[y]],
-       col = colores[1],
-       type = type,
-       pch = 16,
-       xlab = xlab,
-       ylab = ylab,
-       xlim = xlim,
-       ylim = ylim,
-       ...)
+    y = lx[[1]][[y]],
+    col = colores[1],
+    type = type,
+    pch = 16,
+    xlab = xlab,
+    ylab = ylab,
+    xlim = xlim,
+    ylim = ylim,
+    ...)
 
 
-  if(length(lx) > 1) {
-    for(i in 2:length(lx)) {
+  if (length(lx) > 1) {
+    for (i in 2:length(lx)) {
       graphics::points(x = lx[[i]][[time]],
-                       y = lx[[i]][[y]],
-                       col = colores[i],
-                       type = type,
-                       pch = 16,
-                       ...)
+        y = lx[[i]][[y]],
+        col = colores[i],
+        type = type,
+        pch = 16,
+        ...)
 
     }
   }
 
   add_legend <- function(...) {
-    opar <- graphics::par(fig=c(0, 1, 0, 1),
-                          oma=c(0, 0, 0, 0),
-                          mar=c(0, 0, 0, 0),
-                          new=TRUE)
+    opar <- graphics::par(fig = c(0, 1, 0, 1),
+      oma = c(0, 0, 0, 0),
+      mar = c(0, 0, 0, 0),
+      new = TRUE)
     on.exit(graphics::par(opar))
-    plot(0, 0, type='n', bty='n', xaxt='n', yaxt='n')
+    plot(0, 0, type = "n", bty = "n", xaxt = "n", yaxt = "n")
     graphics::legend(...)
   }
 
   add_legend("topright",
-             legend = names(lx),
-             pch=20,
-             col = colores[1:length(lx)],
-             horiz=TRUE,
-             bty='n',
-             cex=1)
+    legend = names(lx),
+    pch = 20,
+    col = colores[1:length(lx)],
+    horiz = TRUE,
+    bty = "n",
+    cex = 1)
 
   add_legend("bottomleft",
-             legend = min(dt[[time]], na.rm = TRUE),
-             horiz=TRUE,
-             bty='n',
-             cex=0.8)
+    legend = min(dt[[time]], na.rm = TRUE),
+    horiz = TRUE,
+    bty = "n",
+    cex = 0.8)
   add_legend("bottomright",
-             legend = max(dt[[time]], na.rm = TRUE),
-             horiz=TRUE,
-             bty='n',
-             cex=0.8)
+    legend = max(dt[[time]], na.rm = TRUE),
+    horiz = TRUE,
+    bty = "n",
+    cex = 0.8)
 
 }

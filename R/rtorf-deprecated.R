@@ -35,20 +35,20 @@ NULL
 #' }
 #' }
 obs_index <- function(
-  obs,
-  categories = c(
-    "aircraft-pfp",
-    "aircraft-insitu",
-    "surface-insitu",
-    "tower-insitu",
-    "aircore",
-    "surface-pfp",
-    "shipboard-insitu",
-    "flask"
-  ),
-  lnchar = 11,
-  out = paste0(tempfile(), "_index.csv"),
-  verbose = TRUE
+                      obs,
+                      categories = c(
+                        "aircraft-pfp",
+                        "aircraft-insitu",
+                        "surface-insitu",
+                        "tower-insitu",
+                        "aircore",
+                        "surface-pfp",
+                        "shipboard-insitu",
+                        "flask"
+                      ),
+                      lnchar = 11,
+                      out = paste0(tempfile(), "_index.csv"),
+                      verbose = TRUE
 ) {
   # cat("Please, use `obs_summary` instead")
   #

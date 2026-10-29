@@ -23,21 +23,21 @@
 #' index <- obs_summary(obs)
 #' }
 obs_summary <- function(
-  obs,
-  categories = c(
-    "aircraft-pfp",
-    "aircraft-insitu",
-    "surface-insitu",
-    "tower-insitu",
-    "aircore",
-    "surface-pfp",
-    "shipboard-insitu",
-    "flask"
-  ),
-  lnchar = 11,
-  out = paste0(tempfile(), "_index.csv"),
-  verbose = TRUE,
-  aslist = FALSE
+                        obs,
+                        categories = c(
+                          "aircraft-pfp",
+                          "aircraft-insitu",
+                          "surface-insitu",
+                          "tower-insitu",
+                          "aircore",
+                          "surface-pfp",
+                          "shipboard-insitu",
+                          "flask"
+                        ),
+                        lnchar = 11,
+                        out = paste0(tempfile(), "_index.csv"),
+                        verbose = TRUE,
+                        aslist = FALSE
 ) {
   x <- list.files(obs, full.names = T)
 

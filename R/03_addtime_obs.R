@@ -61,7 +61,7 @@ obs_addtime <- function(dt, verbose = TRUE, tz = "UTC", timeonly = FALSE) {
       )
     ]
   } else {
-    #if there is no column named time_interval
+    # if there is no column named time_interval
     time_inter <- (dt$midpoint_time - dt$start_time) * 2
     dt$timeUTC_end <- dt$timeUTC_start + time_inter
   }
@@ -114,12 +114,12 @@ obs_addtime <- function(dt, verbose = TRUE, tz = "UTC", timeonly = FALSE) {
 #' # Do not run
 #' }
 obs_addltime <- function(
-  dt,
-  timeUTC = "timeUTC",
-  utc2lt = "site_utc2lst",
-  longitude = "longitude",
-  tz = "UTC",
-  timeonly = FALSE
+                         dt,
+                         timeUTC = "timeUTC",
+                         utc2lt = "site_utc2lst",
+                         longitude = "longitude",
+                         tz = "UTC",
+                         timeonly = FALSE
 ) {
   # Priority site_utc2lst and if it is not available,
   if (any(utc2lt == names(dt))) {
@@ -127,11 +127,11 @@ obs_addltime <- function(
     dt$local_time <- dt[[timeUTC]] + as.numeric(dt[[utc2lt]]) * 60 * 60
     dt$local_time <- ifelse(
       is.na(dt$local_time),
-      dt[[timeUTC]] + dt[[longitude]] / 15 * 60 * 60, #john miller approach
+      dt[[timeUTC]] + dt[[longitude]] / 15 * 60 * 60, # john miller approach
       dt$local_time
     )
   } else {
-    dt$local_time <- dt[[timeUTC]] + dt[[longitude]] / 15 * 60 * 60 #john miller approach
+    dt$local_time <- dt[[timeUTC]] + dt[[longitude]] / 15 * 60 * 60 # john miller approach
   }
 
   if (inherits(dt$local_time, "numeric")) {

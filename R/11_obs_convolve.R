@@ -29,20 +29,20 @@
 #' # do not run
 #' }
 obs_convolve <- function(
-  foot_path = "AAA",
-  name_foot = "foot1",
-  flon = "foot1lon",
-  flat = "foot1lat",
-  time_foot,
-  flux = "CTCO2",
-  df_flux,
-  flux_format = "%Y%m%d.nc",
-  name_var_flux = 1,
-  factor = 1e9,
-  fn = NULL,
-  flip = FALSE,
-  as_list = FALSE,
-  verbose = TRUE
+                         foot_path = "AAA",
+                         name_foot = "foot1",
+                         flon = "foot1lon",
+                         flat = "foot1lat",
+                         time_foot,
+                         flux = "CTCO2",
+                         df_flux,
+                         flux_format = "%Y%m%d.nc",
+                         name_var_flux = 1,
+                         factor = 1e9,
+                         fn = NULL,
+                         flip = FALSE,
+                         as_list = FALSE,
+                         verbose = TRUE
 ) {
   # footprint information
 
@@ -159,7 +159,7 @@ obs_convolve <- function(
   dimnames(foot) <- dim_names
 
   if (
-    !flux %in% c('CTCO2', 'monthly', 'month', 'daily', 'day', 'yearly', 'year')
+    !flux %in% c("CTCO2", "monthly", "month", "daily", "day", "yearly", "year")
   ) {
     stop(
       "flux must be 'CTCO2', 'monthly', 'month', 'daily', 'day', 'yearly', 'year'"
@@ -245,9 +245,9 @@ obs_convolve <- function(
 
       if (flip) {
         dims <- dim(flux_bio)
-        conv_bio[,, j] <- foot[,, j] * flux_bio[, dims[2]:1]
+        conv_bio[, , j] <- foot[, , j] * flux_bio[, dims[2]:1]
       } else {
-        conv_bio[,, j] <- foot[,, j] * flux_bio
+        conv_bio[, , j] <- foot[, , j] * flux_bio
       }
 
       # ocn
@@ -259,9 +259,9 @@ obs_convolve <- function(
 
       if (flip) {
         dims <- dim(flux_ocn)
-        conv_ocn[,, j] <- foot[,, j] * flux_ocn[, dims[2]:1]
+        conv_ocn[, , j] <- foot[, , j] * flux_ocn[, dims[2]:1]
       } else {
-        conv_ocn[,, j] <- foot[,, j] * flux_ocn
+        conv_ocn[, , j] <- foot[, , j] * flux_ocn
       }
 
       # fossil
@@ -273,9 +273,9 @@ obs_convolve <- function(
 
       if (flip) {
         dims <- dim(flux_fossil)
-        conv_fossil[,, j] <- foot[,, j] * flux_fossil[, dims[2]:1]
+        conv_fossil[, , j] <- foot[, , j] * flux_fossil[, dims[2]:1]
       } else {
-        conv_fossil[,, j] <- foot[,, j] * flux_fossil
+        conv_fossil[, , j] <- foot[, , j] * flux_fossil
       }
 
       # fire
@@ -287,9 +287,9 @@ obs_convolve <- function(
 
       if (flip) {
         dims <- dim(flux_fire)
-        conv_fire[,, j] <- foot[,, j] * flux_fire[, dims[2]:1]
+        conv_fire[, , j] <- foot[, , j] * flux_fire[, dims[2]:1]
       } else {
-        conv_fire[,, j] <- foot[,, j] * flux_fire
+        conv_fire[, , j] <- foot[, , j] * flux_fire
       }
 
       ncdf4::nc_close(nc_f)
@@ -337,14 +337,14 @@ obs_convolve <- function(
   }
   yt <- NULL
 
-  #name in flux nc is "%Y-%m-01"
+  # name in flux nc is "%Y-%m-01"
   if (flux %in% c("monthly", "month")) {
     #
 
     df_times_foot[,
       yt := strftime(seq_time_start, format = "%Y-%m-01", tz = "UTC")
     ]
-    #name in flux nc is "%Y-%m-%d"
+    # name in flux nc is "%Y-%m-%d"
   } else if (flux %in% c("daily", "day")) {
     df_times_foot[,
       yt := strftime(seq_time_start, format = "%Y-%m-%d", tz = "UTC")
@@ -409,9 +409,9 @@ obs_convolve <- function(
 
     if (flip) {
       dims <- dim(flux)
-      conv[,, j] <- foot[,, j] * flux[, dims[2]:1]
+      conv[, , j] <- foot[, , j] * flux[, dims[2]:1]
     } else {
-      conv[,, j] <- foot[,, j] * flux
+      conv[, , j] <- foot[, , j] * flux
     }
 
     ncdf4::nc_close(nc_f)
@@ -461,14 +461,14 @@ obs_convolve <- function(
 #' # do not run
 #' }
 obs_foot <- function(
-  foot_path = "AAA",
-  name_foot = "foot1",
-  flon = "foot1lon",
-  flat = "foot1lat",
-  time_foot,
-  fn = NULL,
-  as_list = FALSE,
-  verbose = TRUE
+                     foot_path = "AAA",
+                     name_foot = "foot1",
+                     flon = "foot1lon",
+                     flat = "foot1lat",
+                     time_foot,
+                     fn = NULL,
+                     as_list = FALSE,
+                     verbose = TRUE
 ) {
   # footprint information
 

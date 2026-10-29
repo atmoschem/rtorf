@@ -19,36 +19,36 @@
 #' dt <- obs_read(index)
 #' }
 obs_agg <- function(
-  dt,
-  cols = c(
-    "year",
-    "month",
-    "day",
-    "hour",
-    "minute",
-    "second",
-    "time",
-    "time_decimal",
-    "value",
-    "latitude",
-    "longitude",
-    "altitude",
-    "pressure",
-    "u",
-    "v",
-    "temperature",
-    "type_altitude"
-  ),
-  by = c(
-    "key_time",
-    "site_code",
-    "altitude_final", # useful for towers. Name may change
-    "type_altitude",
-    "lab_1_abbr",
-    "dataset_calibration_scale"
-  ),
-  fn = "mean",
-  verbose = TRUE
+                    dt,
+                    cols = c(
+                      "year",
+                      "month",
+                      "day",
+                      "hour",
+                      "minute",
+                      "second",
+                      "time",
+                      "time_decimal",
+                      "value",
+                      "latitude",
+                      "longitude",
+                      "altitude",
+                      "pressure",
+                      "u",
+                      "v",
+                      "temperature",
+                      "type_altitude"
+                    ),
+                    by = c(
+                      "key_time",
+                      "site_code",
+                      "altitude_final", # useful for towers. Name may change
+                      "type_altitude",
+                      "lab_1_abbr",
+                      "dataset_calibration_scale"
+                    ),
+                    fn = "mean",
+                    verbose = TRUE
 ) {
   if (!inherits(dt, "data.table")) {
     if (verbose) {
@@ -142,11 +142,11 @@ obs_agg <- function(
 #' dy <- obs_select_sec(dx)
 #' }
 obs_select_sec <- function(
-  dt,
-  origin = "1970-01-01",
-  tz = "UTC",
-  seconds = 30,
-  verbose = TRUE
+                           dt,
+                           origin = "1970-01-01",
+                           tz = "UTC",
+                           seconds = 30,
+                           verbose = TRUE
 ) {
   if (!inherits(dt, "data.table")) {
     if (verbose) {

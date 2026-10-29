@@ -20,8 +20,8 @@
 #' dx <- obs_table(dt)
 #' }
 obs_table <- function(
-  df,
-  cols = c("value", "time", "time_decimal", "latitude", "longitude")
+                      df,
+                      cols = c("value", "time", "time_decimal", "latitude", "longitude")
 ) {
   .SD <- . <- name <- site_name <- site_latitude <- NULL
   site_longitude <- site_country <- site_code <- NULL

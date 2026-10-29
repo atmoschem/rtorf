@@ -47,7 +47,7 @@
 #'   magl          \tab agl      \cr
 #'   masl          \tab asl      \cr
 #'   not available \tab f-PBL    \cr
-#'}
+#' }
 #'
 #' @examples \dontrun{
 #' # Do not run
@@ -57,23 +57,23 @@
 #' obs_read(index, expr = "altitude_final == '5800'")
 #' }
 obs_read <- function(
-  index,
-  categories = "flask",
-  expr = NULL,
-  verbose = TRUE,
-  n_site_code = 15,
-  n_site_latitude = 18,
-  n_site_longitude = 19,
-  n_site_name = 15,
-  n_site_country = 18,
-  n_dataset_project = 21,
-  n_lab = 16,
-  n_scales = 31,
-  n_site_elevation = 20,
-  n_altitude_comment = 22,
-  n_utc = 18,
-  fill_value = -1e+34,
-  as_list = FALSE
+                     index,
+                     categories = "flask",
+                     expr = NULL,
+                     verbose = TRUE,
+                     n_site_code = 15,
+                     n_site_latitude = 18,
+                     n_site_longitude = 19,
+                     n_site_name = 15,
+                     n_site_country = 18,
+                     n_dataset_project = 21,
+                     n_lab = 16,
+                     n_scales = 31,
+                     n_site_elevation = 20,
+                     n_altitude_comment = 22,
+                     n_utc = 18,
+                     fill_value = -1e+34,
+                     as_list = FALSE
 ) {
   if (nrow(index) == 0) {
     stop("empty index")
@@ -253,9 +253,9 @@ obs_read <- function(
     dt$site_utc2lst <- site_utc2lst
     dt$agl <- agl
     df$n <- n
-    #if agl is NA, agl = altitude - elevation
-    #if elevation is fill_value, NA
-    #if altitude - elevation = NA, use altitude => asl
+    # if agl is NA, agl = altitude - elevation
+    # if elevation is fill_value, NA
+    # if altitude - elevation = NA, use altitude => asl
 
     dt$site_elevation <- ifelse(
       dt$site_elevation == fill_value,
@@ -291,7 +291,7 @@ obs_read <- function(
 
   unames <- unique(unlist(sapply(lx, names)))
 
-  #add names
+  # add names
   for (i in 1:length(lx)) {
     ly <- obs_out(names(lx[[i]]), unames)
     if (length(ly) > 0) {
@@ -350,14 +350,14 @@ obs_read <- function(
 #' dt <- obs_read(index)
 #' }
 obs_read_nc <- function(
-  index,
-  categories = "flask",
-  att = FALSE,
-  expr = NULL,
-  solar_time = if (grepl("aircraft", categories)) FALSE else TRUE,
-  as_list = FALSE,
-  verbose = FALSE,
-  warnings = FALSE
+                        index,
+                        categories = "flask",
+                        att = FALSE,
+                        expr = NULL,
+                        solar_time = if (grepl("aircraft", categories)) FALSE else TRUE,
+                        as_list = FALSE,
+                        verbose = FALSE,
+                        warnings = FALSE
 ) {
   if (nrow(index) == 0) {
     stop("empty index")
@@ -444,7 +444,7 @@ obs_read_nc <- function(
       print(log)
     }
 
-    #here we manually add intake and site unit
+    # here we manually add intake and site unit
     suppressWarnings(
       dt$dataset_intake_ht_unit <- global[["dataset_intake_ht_unit"]]
     )
@@ -486,7 +486,7 @@ obs_read_nc <- function(
     ncdf4::nc_close(nc)
 
     # if exist, cool, if not, NA
-    #aircore or aircraft
+    # aircore or aircraft
     if (any(grepl("airc", unique(dt$dataset_project)))) {
       dt$altitude_final <- dt$altitude
       dt$type_altitude <- 1
@@ -507,7 +507,7 @@ obs_read_nc <- function(
 
   unames <- unique(unlist(sapply(lx, names)))
 
-  #add names
+  # add names
   for (i in 1:length(lx)) {
     ly <- obs_out(names(lx[[i]]), unames)
     if (length(ly) > 0) {
@@ -559,10 +559,10 @@ obs_read_nc <- function(
 #' dt <- obs_read(index)
 #' }
 obs_read_nc_att <- function(
-  index,
-  as_list = FALSE,
-  verbose = FALSE,
-  warnings = FALSE
+                            index,
+                            as_list = FALSE,
+                            verbose = FALSE,
+                            warnings = FALSE
 ) {
   if (nrow(index) == 0) {
     stop("empty index")
@@ -603,7 +603,7 @@ obs_read_nc_att <- function(
 
   unames <- unique(unlist(sapply(lx, names)))
 
-  #add names
+  # add names
   for (i in 1:length(lx)) {
     ly <- obs_out(names(lx[[i]]), unames)
     if (length(ly) > 0) {

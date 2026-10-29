@@ -131,12 +131,12 @@
 #' str(cd$concentrations[[cd$species[1]]])
 #' }
 obs_hysplit_cdump_read <- function(
-  cdump,
-  drange = NULL,
-  century = NULL,
-  massunit = "1",
-  pollutant = "pollutant",
-  verbose = FALSE
+                                   cdump,
+                                   drange = NULL,
+                                   century = NULL,
+                                   massunit = "1",
+                                   pollutant = "pollutant",
+                                   verbose = FALSE
 ) {
   if (missing(cdump) || !is.character(cdump) || length(cdump) != 1L) {
     stop("cdump must be a single string with the path of the file")
@@ -471,12 +471,12 @@ obs_hysplit_cdump_read <- function(
 #' obs_hysplit_cdump_nc(cd, "cdump.nc")
 #' }
 obs_hysplit_cdump_nc <- function(
-  x,
-  nc_out,
-  height_reference = c("sea_level", "ground_level"),
-  control = NULL,
-  setup = NULL,
-  verbose = FALSE
+                                 x,
+                                 nc_out,
+                                 height_reference = c("sea_level", "ground_level"),
+                                 control = NULL,
+                                 setup = NULL,
+                                 verbose = FALSE
 ) {
   if (!is.list(x) || is.null(x$concentrations) || is.null(x$atts)) {
     stop("x must be the output of obs_hysplit_cdump_read")
@@ -713,16 +713,16 @@ obs_hysplit_cdump_nc <- function(
 #' obs_hysplit_cdump2nc("cdump")
 #' }
 obs_hysplit_cdump2nc <- function(
-  cdump,
-  nc_out = NULL,
-  drange = NULL,
-  century = NULL,
-  massunit = "1",
-  pollutant = "pollutant",
-  height_reference = c("sea_level", "ground_level"),
-  control = NULL,
-  setup = NULL,
-  verbose = FALSE
+                                 cdump,
+                                 nc_out = NULL,
+                                 drange = NULL,
+                                 century = NULL,
+                                 massunit = "1",
+                                 pollutant = "pollutant",
+                                 height_reference = c("sea_level", "ground_level"),
+                                 control = NULL,
+                                 setup = NULL,
+                                 verbose = FALSE
 ) {
   if (is.null(nc_out)) {
     nc_out <- paste0(cdump, ".nc")

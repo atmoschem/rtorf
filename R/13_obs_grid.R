@@ -98,14 +98,14 @@ get_nt <- function() {
 #'
 #' @export
 obs_grid_simple <- function(
-  x,
-  lon_min,
-  lat_min,
-  lon_max,
-  lat_max,
-  res = 0.1,
-  n_threads = 1L,
-  npar = 1L
+                            x,
+                            lon_min,
+                            lat_min,
+                            lon_max,
+                            lat_max,
+                            res = 0.1,
+                            n_threads = 1L,
+                            npar = 1L
 ) {
   stopifnot(
     is.data.frame(x),
@@ -176,20 +176,20 @@ obs_grid_simple <- function(
 #'
 #' @export
 obs_grid_cube <- function(
-  x,
-  lon_min,
-  lat_min,
-  lon_max,
-  lat_max,
-  res = 0.1,
-  nt = 240L,
-  t0 = 0,
-  dt = 60,
-  method = c("simple", "kernel"),
-  bandwidth = res,
-  use_haversine = FALSE,
-  n_threads = 1L,
-  npar = 1L
+                          x,
+                          lon_min,
+                          lat_min,
+                          lon_max,
+                          lat_max,
+                          res = 0.1,
+                          nt = 240L,
+                          t0 = 0,
+                          dt = 60,
+                          method = c("simple", "kernel"),
+                          bandwidth = res,
+                          use_haversine = FALSE,
+                          n_threads = 1L,
+                          npar = 1L
 ) {
   method <- match.arg(method)
   stopifnot(
@@ -364,17 +364,17 @@ obs_grid_cube <- function(
 #'
 #' @export
 obs_grid_kernel <- function(
-  x,
-  lon_min,
-  lat_min,
-  lon_max,
-  lat_max,
-  lon_res = 0.1,
-  lat_res = 0.1,
-  bandwidth = lon_res,
-  use_haversine = FALSE,
-  n_threads = 1L,
-  npar = 1L
+                            x,
+                            lon_min,
+                            lat_min,
+                            lon_max,
+                            lat_max,
+                            lon_res = 0.1,
+                            lat_res = 0.1,
+                            bandwidth = lon_res,
+                            use_haversine = FALSE,
+                            n_threads = 1L,
+                            npar = 1L
 ) {
   stopifnot(
     is.data.frame(x),

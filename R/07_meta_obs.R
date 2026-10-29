@@ -25,21 +25,21 @@
 #' dt <- obs_meta(index)
 #' }
 obs_meta <- function(
-  index,
-  verbose = TRUE,
-  n_site_code = 15,
-  n_site_name = 15,
-  n_site_latitude = 18,
-  n_site_longitude = 19,
-  n_site_country = 18,
-  n_dataset_project = 21,
-  n_lab = 16,
-  n_scales = 31,
-  n_site_elevation = 20,
-  n_altitude_comment = 22,
-  n_utc = 18,
-  fill_value = -1e+34,
-  as_list = FALSE
+                     index,
+                     verbose = TRUE,
+                     n_site_code = 15,
+                     n_site_name = 15,
+                     n_site_latitude = 18,
+                     n_site_longitude = 19,
+                     n_site_country = 18,
+                     n_dataset_project = 21,
+                     n_lab = 16,
+                     n_scales = 31,
+                     n_site_elevation = 20,
+                     n_altitude_comment = 22,
+                     n_utc = 18,
+                     fill_value = -1e+34,
+                     as_list = FALSE
 ) {
   df <- index
   if (nrow(df) == 0) {

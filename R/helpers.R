@@ -195,12 +195,12 @@ obs_rbind <- function(dt1, dt2, verbose = TRUE) {
 #' data.table::fread(f, h = TRUE)
 #' }
 obs_write_csvy <- function(
-  dt,
-  notes,
-  out = paste0(tempfile(), ".csvy"),
-  sep = ",",
-  nchar.max = 80,
-  ...
+                           dt,
+                           notes,
+                           out = paste0(tempfile(), ".csvy"),
+                           sep = ",",
+                           nchar.max = 80,
+                           ...
 ) {
   sink(file = out)
   cat("---\n")
@@ -291,7 +291,7 @@ obs_read_csvy <- function(f, n = 100, ...) {
 #'         width = 8,
 #'         format = "f",
 #'         flag = "0")
-#'}
+#' }
 obs_trunc <- function(n, dec) {
   n <- n + (10^-(dec + 5))
   f <- NULL
@@ -362,19 +362,19 @@ obs_trunc <- function(n, dec) {
 #'              fullpath = TRUE)
 #' }
 obs_footname <- function(
-  time = NULL,
-  year,
-  month,
-  day,
-  hour,
-  minute,
-  second,
-  lat,
-  lon,
-  alt,
-  fullpath = FALSE,
-  out,
-  ...
+                         time = NULL,
+                         year,
+                         month,
+                         day,
+                         hour,
+                         minute,
+                         second,
+                         lat,
+                         lon,
+                         alt,
+                         fullpath = FALSE,
+                         out,
+                         ...
 ) {
   lats <- ifelse(lat > 0, "N", "S")
   lat <- abs(lat)
@@ -386,25 +386,25 @@ obs_footname <- function(
 
   if (!is.null(time)) {
     dt1 <- paste0(
-      sprintf(data.table::year(time), fmt = '%02d'),
+      sprintf(data.table::year(time), fmt = "%02d"),
       "/",
-      sprintf(data.table::month(time), fmt = '%02d'),
+      sprintf(data.table::month(time), fmt = "%02d"),
       "/hysplit"
     )
 
     dt <- paste0(
-      sprintf(data.table::year(time), fmt = '%02d'),
+      sprintf(data.table::year(time), fmt = "%02d"),
       "x",
-      sprintf(data.table::month(time), fmt = '%02d'),
+      sprintf(data.table::month(time), fmt = "%02d"),
       "x",
-      sprintf(as.numeric(strftime(time, "%d", tz = "UTC")), fmt = '%02d'),
+      sprintf(as.numeric(strftime(time, "%d", tz = "UTC")), fmt = "%02d"),
       "x",
-      sprintf(data.table::hour(time), fmt = '%02d'),
+      sprintf(data.table::hour(time), fmt = "%02d"),
       "x",
-      sprintf(data.table::minute(time), fmt = '%02d'),
+      sprintf(data.table::minute(time), fmt = "%02d"),
       "x",
       if (!missing(second)) {
-        paste0(sprintf(data.table::second(time), fmt = '%02d'), "x")
+        paste0(sprintf(data.table::second(time), fmt = "%02d"), "x")
       } else {
         NULL
       },
@@ -427,29 +427,29 @@ obs_footname <- function(
       ),
       lons,
       "x",
-      sprintf(round(agl), fmt = '%05d')
+      sprintf(round(agl), fmt = "%05d")
     )
   } else {
     dt1 <- paste0(
-      sprintf(year, fmt = '%02d'),
+      sprintf(year, fmt = "%02d"),
       "/",
-      sprintf(month, fmt = '%02d'),
+      sprintf(month, fmt = "%02d"),
       "/hysplit"
     )
 
     dt <- paste0(
-      sprintf(year, fmt = '%02d'),
+      sprintf(year, fmt = "%02d"),
       "x",
-      sprintf(month, fmt = '%02d'),
+      sprintf(month, fmt = "%02d"),
       "x",
-      sprintf(day, fmt = '%02d'),
+      sprintf(day, fmt = "%02d"),
       "x",
-      sprintf(hour, fmt = '%02d'),
+      sprintf(hour, fmt = "%02d"),
       "x",
-      sprintf(minute, fmt = '%02d'),
+      sprintf(minute, fmt = "%02d"),
       "x",
       if (!missing(second)) {
-        paste0(sprintf(second, fmt = '%02d'), "x")
+        paste0(sprintf(second, fmt = "%02d"), "x")
       } else {
         NULL
       },
@@ -472,7 +472,7 @@ obs_footname <- function(
       ),
       lons,
       "x",
-      sprintf(round(agl), fmt = '%05d')
+      sprintf(round(agl), fmt = "%05d")
     )
   }
 

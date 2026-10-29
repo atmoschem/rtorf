@@ -34,36 +34,36 @@ obs_find_receptors <- function(path,
                                lon,
                                alt,
                                out = paste0(tempfile(), ".csvy"),
-                               verbose = FALSE){
+                               verbose = FALSE) {
 
 
   dt <- data.table::data.table(
     expect = obs_footname(year = year,
-                          month  = month,
-                          day = day,
-                          hour = hour,
-                          minute = minute,
-                          lat = lat,
-                          lon = lon,
-                          alt = alt
+      month  = month,
+      day = day,
+      hour = hour,
+      minute = minute,
+      lat = lat,
+      lon = lon,
+      alt = alt
     )
   )
 
 
   ld <- list.files(path = path,
-                   pattern = ".nc",
-                   recursive = T,
-                   full.names = T)
+    pattern = ".nc",
+    recursive = T,
+    full.names = T)
 
   ln <- list.files(path = path,
-                   pattern = ".nc",
-                   recursive = T,
-                   full.names = F)
+    pattern = ".nc",
+    recursive = T,
+    full.names = F)
 
-  if(verbose) print(ld)
+  if (verbose) print(ld)
 
   df <- data.table::data.table(file = ln,
-                               expect = ln)
+    expect = ln)
 
   dx <- merge(dt, df, by = "expect", all.x = T)
 
@@ -71,10 +71,10 @@ obs_find_receptors <- function(path,
   dx[, missing := ifelse(is.na(file), T, F)]
 
 
-  if(!missing(out)) {
+  if (!missing(out)) {
     obs_write_csvy(dt = dx,
-              notes = "expected files",
-              out = out)
+      notes = "expected files",
+      out = out)
   }
   return(dx)
 

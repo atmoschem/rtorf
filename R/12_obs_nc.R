@@ -29,14 +29,14 @@
 #' #        verbose = TRUE)
 #' }
 obs_nc <- function(
-  lat,
-  lon,
-  time_nc,
-  vars_out = c("total", "bio", "ocn", "fossil", "fire"),
-  units_out,
-  nc_out,
-  larrays,
-  verbose = FALSE
+                   lat,
+                   lon,
+                   time_nc,
+                   vars_out = c("total", "bio", "ocn", "fossil", "fire"),
+                   units_out,
+                   nc_out,
+                   larrays,
+                   verbose = FALSE
 ) {
   # function to aggregate convolved fluxes
 
@@ -138,12 +138,12 @@ obs_nc <- function(
 #' #f <- obs_nc_get(nc_path = nc_path)
 #' }
 obs_nc_get <- function(
-  nc_path = "AAA",
-  nc_name = "foot1",
-  nc_lat = "foot1lat",
-  nc_lon = "foot1lon",
-  verbose = FALSE,
-  all = FALSE
+                       nc_path = "AAA",
+                       nc_name = "foot1",
+                       nc_lat = "foot1lat",
+                       nc_lon = "foot1lon",
+                       verbose = FALSE,
+                       all = FALSE
 ) {
   # function to aggregate convolved fluxes
 
@@ -246,10 +246,10 @@ obs_nc_get <- function(
 #' # terra::rast("output.nc") now reads correctly without t()
 #' }
 obs_foot_flip <- function(
-  arr,
-  from = c("traj", "cf"),
-  flip_lat = FALSE,
-  flip_lon = FALSE
+                          arr,
+                          from = c("traj", "cf"),
+                          flip_lat = FALSE,
+                          flip_lon = FALSE
 ) {
   from <- match.arg(from)
 

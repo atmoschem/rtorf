@@ -205,16 +205,16 @@ obs_julian <- function(m, d, y, origin.) {
 #'             alt = 1) [1]
 #' }
 obs_info2id <- function(
-  yr,
-  mo,
-  dy,
-  hr,
-  mn = 0,
-  lat,
-  lon,
-  alt,
-  sep = "x",
-  long = TRUE
+                        yr,
+                        mo,
+                        dy,
+                        hr,
+                        mn = 0,
+                        lat,
+                        lon,
+                        alt,
+                        sep = "x",
+                        long = TRUE
 ) {
   # function to create identifying label for single receptor
   # (location&time) expects alt as altitude above ground in meters
@@ -249,22 +249,22 @@ obs_info2id <- function(
   }
 
   # need leading zeros
-  hr <- substring(100 + hr, 2) #2 digit hr
-  yr4 <- substring(10000 + yr, 2) #4 digit year
-  mon <- substring(100 + mo, 2) #2 digit mon
-  day <- substring(100 + dy, 2) #2 digit day
-  mn <- substring(100 + mn, 2) #2 digit day
+  hr <- substring(100 + hr, 2) # 2 digit hr
+  yr4 <- substring(10000 + yr, 2) # 4 digit year
+  mon <- substring(100 + mo, 2) # 2 digit mon
+  day <- substring(100 + dy, 2) # 2 digit day
+  mn <- substring(100 + mn, 2) # 2 digit day
 
   # location
   if (!long) {
-    lat <- round(lat, 2) #1 km roundoff
-    lon <- round(lon, 2) #1 km roundoff
+    lat <- round(lat, 2) # 1 km roundoff
+    lon <- round(lon, 2) # 1 km roundoff
   } else {
     lat <- round(lat, 4)
     lon <- round(lon, 4)
   }
 
-  alt <- round(alt) #1 m roundoff
+  alt <- round(alt) # 1 m roundoff
   # no below ground...
   alt[alt < 0] <- 0
   # need leading zeros and sign
@@ -273,14 +273,14 @@ obs_info2id <- function(
   lats[lat >= 0] <- "N"
   lons[lon >= 0] <- "E"
   if (!long) {
-    lat <- paste(substring(100.001 + abs(lat), 2, 6), lats, sep = "") #2 dig. before decimal + sign
-    lon <- paste(substring(1000.001 + abs(lon), 2, 7), lons, sep = "") #3 dig. before decimal + sign
+    lat <- paste(substring(100.001 + abs(lat), 2, 6), lats, sep = "") # 2 dig. before decimal + sign
+    lon <- paste(substring(1000.001 + abs(lon), 2, 7), lons, sep = "") # 3 dig. before decimal + sign
   } else {
-    lat <- paste(substring(100.00001 + abs(lat), 2, 8), lats, sep = "") #2 dig. before decimal + sign
-    lon <- paste(substring(1000.00001 + abs(lon), 2, 9), lons, sep = "") #3 dig. before decimal + sign
+    lat <- paste(substring(100.00001 + abs(lat), 2, 8), lats, sep = "") # 2 dig. before decimal + sign
+    lon <- paste(substring(1000.00001 + abs(lon), 2, 9), lons, sep = "") # 3 dig. before decimal + sign
   }
   alt <- substring(1e+05 + alt, 2)
-  out <- paste(yr4, mon, day, hr, lat, lon, alt, sep = sep) #put everything together
+  out <- paste(yr4, mon, day, hr, lat, lon, alt, sep = sep) # put everything together
   if (long) {
     out <- paste(yr4, mon, day, hr, mn, lat, lon, alt, sep = sep)
   }
@@ -315,7 +315,7 @@ obs_julian <- function(y, m, d, origin., legacy = FALSE, verbose = TRUE) {
     if (verbose) {
       cat("Using legacy code\n")
     }
-    #returns day since 1/1/1960
+    # returns day since 1/1/1960
     #
     #  $Id: julian.r,v 1.2 2007/06/27 11:54:03 skoerner Exp $
     #---------------------------------------------------------------------------------------------------
@@ -424,25 +424,25 @@ obs_julian <- function(y, m, d, origin., legacy = FALSE, verbose = TRUE) {
 #' # Do not run
 #' }
 obs_traj_foot <- function(
-  ident,
-  part = NULL,
-  timelabel = NULL,
-  pathname = "",
-  foottimes = 0:240,
-  zlim = c(0, 0),
-  coarse = 1,
-  dmassTF = TRUE,
-  numpix.x = 70,
-  numpix.y = 70,
-  lon.ll = -145,
-  lat.ll = 11,
-  lon.res = 1,
-  lat.res = 1,
-  npar = 500,
-  eps.global = 0.1,
-  adaptive = TRUE,
-  center = FALSE,
-  terminal_background = TRUE
+                          ident,
+                          part = NULL,
+                          timelabel = NULL,
+                          pathname = "",
+                          foottimes = 0:240,
+                          zlim = c(0, 0),
+                          coarse = 1,
+                          dmassTF = TRUE,
+                          numpix.x = 70,
+                          numpix.y = 70,
+                          lon.ll = -145,
+                          lat.ll = 11,
+                          lon.res = 1,
+                          lat.res = 1,
+                          npar = 500,
+                          eps.global = 0.1,
+                          adaptive = TRUE,
+                          center = FALSE,
+                          terminal_background = TRUE
 ) {
   if (center) {
     lon.ll <- lon.ll - lon.res / 2
@@ -455,15 +455,15 @@ obs_traj_foot <- function(
   }
 
   if (is.null(npar)) {
-    stop('Missing npar')
+    stop("Missing npar")
   }
 
   if (dmassTF) {
-    if (any(names(part) == 'dmass')) {
-      dmassname <- 'dmass'
+    if (any(names(part) == "dmass")) {
+      dmassname <- "dmass"
     } else {
-      if (any(names(part) == 'ndmass')) {
-        dmassname <- 'ndmass'
+      if (any(names(part) == "ndmass")) {
+        dmassname <- "ndmass"
       } else {
         stop("dmass or ndmass column is not available for this run")
       }
@@ -473,30 +473,30 @@ obs_traj_foot <- function(
   # null args for checking
   foot <- index <- sumx <- NULL
 
-  #get grid indices
-  #For horizontal grids (lower left corner of south-west gridcell: 11N,145W; resolution: 1/4 lon, 1/6 lat, 376 (x) times 324 (y))
+  # get grid indices
+  # For horizontal grids (lower left corner of south-west gridcell: 11N,145W; resolution: 1/4 lon, 1/6 lat, 376 (x) times 324 (y))
   lats <- seq(lat.ll, (lat.ll + (numpix.y - 1) * lat.res), lat.res)
   lons <- seq(lon.ll, (lon.ll + (numpix.x - 1) * lon.res), lon.res)
 
   if (any(lons > 180)) {
-    #lon.ll is specified for Eastern Hemisphere and footprint
-    #grid crosses dateline into Western Hemisphere
+    # lon.ll is specified for Eastern Hemisphere and footprint
+    # grid crosses dateline into Western Hemisphere
     partlons <- part$lon
     partlons[partlons < 0] <- partlons[partlons < 0] + 360
     gitx <- floor(1 / lon.res * (partlons - lon.ll) + 1)
   } else {
-    #assumes westernmost gridcell is smallest longitude & easternmost
-    #gridcell is largest longitude; does not work over dateline
+    # assumes westernmost gridcell is smallest longitude & easternmost
+    # gridcell is largest longitude; does not work over dateline
     gitx <- floor(1 / lon.res * (part$lon - lon.ll) + 1)
   }
 
   # Check for global grid, adjust gitx accordingly: define nperiodic.x as: lon(i)=lon(i+nperiodic.nx)
   periodic.nx <- NULL
-  #case 1: explicitly periodic, lon(1)=lon(numpix.x):
+  # case 1: explicitly periodic, lon(1)=lon(numpix.x):
   if (abs(abs((numpix.x - 1) * lon.res) - 360) < abs(eps.global * lon.res)) {
     periodic.nx <- numpix.x - 1
   }
-  #case 2: implicitly periodic, lon(1)=lon(numpix.x)+lon.res:
+  # case 2: implicitly periodic, lon(1)=lon(numpix.x)+lon.res:
   if (abs(abs(numpix.x * lon.res) - 360) < abs(eps.global * lon.res)) {
     periodic.nx <- numpix.x
   }
@@ -506,20 +506,20 @@ obs_traj_foot <- function(
     gitx[gitx > periodic.nx] <- gitx[gitx > periodic.nx] - periodic.nx
   }
 
-  #assumes southernmost gridcell is smallest latitude & northernmost gridcell
-  #is largest latitude; does not work over poles
+  # assumes southernmost gridcell is smallest latitude & northernmost gridcell
+  # is largest latitude; does not work over poles
   global.lats <- abs(abs(lat.res * numpix.y) - 180) < abs(eps.global) * lat.res
-  global.msg <- 'Using a grid that is '
+  global.msg <- "Using a grid that is "
   if (is.null(periodic.nx)) {
-    global.msg <- c(global.msg, ' not global in lon')
+    global.msg <- c(global.msg, " not global in lon")
   } else {
-    global.msg <- c(global.msg, ' global in lon with periodic.nx=', periodic.nx)
+    global.msg <- c(global.msg, " global in lon with periodic.nx=", periodic.nx)
   }
-  global.msg <- c(global.msg, ' and global.lats=', global.lats)
-  cat(global.msg, '\n', sep = '')
+  global.msg <- c(global.msg, " and global.lats=", global.lats)
+  cat(global.msg, "\n", sep = "")
   gity <- floor(1 / lat.res * (part$lat - lat.ll) + 1)
 
-  #edit lons over dateline (for use in foot dimnames)
+  # edit lons over dateline (for use in foot dimnames)
   lons[lons > 180] <- lons[lons > 180] - 360
 
   part <- cbind(part, gitx, gity)
@@ -533,14 +533,14 @@ obs_traj_foot <- function(
   data.table::setorderv(part, c("btime", "index"))
 
   if (dmassTF) {
-    if ('ndmass' %in% names(part)) {
-      cat('Using existing ndmass to remove particles with dmass violation\n')
+    if ("ndmass" %in% names(part)) {
+      cat("Using existing ndmass to remove particles with dmass violation\n")
     } else {
-      cat('Calculating ndmass to remove particles with dmass violation\n')
+      cat("Calculating ndmass to remove particles with dmass violation\n")
       part <- obs_normalize_dmass(part = part)
     }
 
-    #remove rows where ndmass =NA
+    # remove rows where ndmass =NA
     ndmass <- NULL
     part <- part[!is.na(ndmass)]
   }
@@ -570,7 +570,7 @@ obs_traj_foot <- function(
     part[, sumx := NULL]
   }
 
-  #only keep points, when information is changed:
+  # only keep points, when information is changed:
   if (is.null(periodic.nx)) {
     # For non-periodic longitude grids
     if (!global.lats) {
@@ -612,7 +612,7 @@ obs_traj_foot <- function(
     part <- part[agl > zlim[1] & agl <= zlim[2]]
   }
 
-  #move x and y position of final position to initialization area (gitx=1, gity= 1 to numpix.y), at least make sure they are not outside NGM
+  # move x and y position of final position to initialization area (gitx=1, gity= 1 to numpix.y), at least make sure they are not outside NGM
   part[gitx > numpix.x, gitx := numpix.x]
   part[gitx < 1, gitx := 1]
 
@@ -621,11 +621,11 @@ obs_traj_foot <- function(
 
   part[, btime := round(btime, 2)]
 
-  #create object for output: 3d array (lat-lon-time)
+  # create object for output: 3d array (lat-lon-time)
   foot.arr <- array(0, dim = c(numpix.y, numpix.x, length(foottimes) - 1))
 
   for (foottimespos in 1:(length(foottimes) - 1)) {
-    #loop over time intervals
+    # loop over time intervals
 
     # to iterate between 0 to 240 every hour
     subpart <- part[
@@ -657,7 +657,7 @@ obs_traj_foot <- function(
 
     btime <- subpart[selfirst > 0]$btime
 
-    #now get information back in format for all timesteps and index-numbers
+    # now get information back in format for all timesteps and index-numbers
     minmax.yx <- data.table::data.table(btime, max.x, min.x, max.y, min.y)
     minmax.yx <- merge(subpart[, c("btime", "index")], minmax.yx, by = "btime")
 
@@ -666,9 +666,9 @@ obs_traj_foot <- function(
     max.y <- minmax.yx$max.y
     min.y <- minmax.yx$min.y
 
-    #Call '' to get correct emission grid--necessary b/c emission grid is too large,
+    # Call '' to get correct emission grid--necessary b/c emission grid is too large,
     #  so divided into several diff objects
-    #use getgridp.ssc function: don't allow the resolution to get
+    # use getgridp.ssc function: don't allow the resolution to get
     # finer at earlier backtime; use cummax(ran.x)
 
     gridresult <- obs_grid(
@@ -687,29 +687,29 @@ obs_traj_foot <- function(
       gridresult$gridname
     )
 
-    #Extract appropriate emissions within each emission grid--do one grid at a time
+    # Extract appropriate emissions within each emission grid--do one grid at a time
     #  b/c reduces # of times grid has to be accessed
-    coarsex <- c(1, 1, 2, 2, 2, 4, 4, 4, 8, 8, 8, 16, 16, 16, 32, 32) #factors by which grids have been made coarser
-    coarsey <- c(1, 2, 1, 2, 4, 2, 4, 8, 4, 8, 16, 8, 16, 32, 16, 32) #e.g., '4' means grid is 4 times coarser
-    #loop over different surface grids
-    emissgrid.all <- matrix(0, nrow = numpix.y, ncol = numpix.x) #initialize fine grid with "0" everywhere
+    coarsex <- c(1, 1, 2, 2, 2, 4, 4, 4, 8, 8, 8, 16, 16, 16, 32, 32) # factors by which grids have been made coarser
+    coarsey <- c(1, 2, 1, 2, 4, 2, 4, 8, 4, 8, 16, 8, 16, 32, 16, 32) # e.g., '4' means grid is 4 times coarser
+    # loop over different surface grids
+    emissgrid.all <- matrix(0, nrow = numpix.y, ncol = numpix.x) # initialize fine grid with "0" everywhere
 
     for (name in unique(emissname)) {
-      emissgrid <- matrix(0, nrow = numpix.y, ncol = numpix.x) #initialize fine grid with "0" everywhere
+      emissgrid <- matrix(0, nrow = numpix.y, ncol = numpix.x) # initialize fine grid with "0" everywhere
 
       sel <- emissname == name
 
-      xpart <- gridresult[sel, unique(xpart)] #xpart can be 0~3
+      xpart <- gridresult[sel, unique(xpart)] # xpart can be 0~3
 
-      ypart <- gridresult[sel, unique(ypart)] #ypart can be 0~3
+      ypart <- gridresult[sel, unique(ypart)] # ypart can be 0~3
 
-      gridname <- gridresult[sel, unique(gridname)] #gridname can be 1~16, representing diff. resolutions of grid
+      gridname <- gridresult[sel, unique(gridname)] # gridname can be 1~16, representing diff. resolutions of grid
 
       x <- subpart[sel]$gitx
 
       y <- subpart[sel]$gity
 
-      #Convert mins & maxes from coordinate values to rows & columns
+      # Convert mins & maxes from coordinate values to rows & columns
       shrink.x <- coarsex[gridname]
 
       shrink.y <- coarsey[gridname]
@@ -719,75 +719,75 @@ obs_traj_foot <- function(
           xpart == 0 |
           ypart == 0
       ) {
-        #grids have NOT been divided
+        # grids have NOT been divided
         x <- ceiling(x / shrink.x)
         y <- ceiling(y / shrink.y)
       } else {
-        #grids have been divided up
+        # grids have been divided up
         x <- floor((x - floor((numpix.x / 4) * (xpart - 1))) / shrink.x)
         y <- floor((y - floor((numpix.y / 4) * (ypart - 1))) / shrink.y)
       }
-      #get index pairs to extract surface pixels
-      yxv <- y * 1000 + x #separate in order of magnitude
+      # get index pairs to extract surface pixels
+      yxv <- y * 1000 + x # separate in order of magnitude
 
-      #get index pairs to extract surface pixels, for extracting emission grid (e.g. CO)
+      # get index pairs to extract surface pixels, for extracting emission grid (e.g. CO)
       yx <- cbind(y, x)
 
-      ##########BUDGET##########
+      ########## BUDGET##########
       if (zlim[2] == 0) {
-        #surface influence
-        #Take emission values at particle positions; multiply by "foot", i.e. sensitivity of mixing ratio changes to fluxes,
-        #in ppm/(micro-mol/m^2/s)
+        # surface influence
+        # Take emission values at particle positions; multiply by "foot", i.e. sensitivity of mixing ratio changes to fluxes,
+        # in ppm/(micro-mol/m^2/s)
         influence <- subpart[sel]$foot
-        #also multiplied by dmass (accumulated weight of particles due to mass violation, normalized by average dmass to conserve total mass over time)
+        # also multiplied by dmass (accumulated weight of particles due to mass violation, normalized by average dmass to conserve total mass over time)
         if (dmassTF) influence <- influence * subpart[sel]$ndmass # make it work wiht dmass also
       } else {
-        #different "budget" for volume influence (i.e. zlim[2]>0)
-        influence <- subpart[sel]$foot * 60 #res. time in seconds
+        # different "budget" for volume influence (i.e. zlim[2]>0)
+        influence <- subpart[sel]$foot * 60 # res. time in seconds
         if (dmassTF) influence <- influence * subpart[sel]$ndmass
       }
 
       for (yxg in unique(yxv)) {
-        #for each gridcell...
-        #now need to vary each x and y between coarse grid cells to map it on fine grid cell
+        # for each gridcell...
+        # now need to vary each x and y between coarse grid cells to map it on fine grid cell
         selunix <- yxv == yxg
         xfine <- yxg - floor(yxg / 1000) * 1000
         yfine <- floor(yxg / 1000)
         if (gridname > 3 | xpart == 0 | ypart == 0) {
-          #grids have NOT been divided
+          # grids have NOT been divided
           xfine <- (xfine - 1) * shrink.x + 1
           yfine <- (yfine - 1) * shrink.y + 1
           xfine <- xfine:(xfine + shrink.x - 1)
           yfine <- yfine:(yfine + shrink.y - 1)
         } else {
-          #grids have been divided up
+          # grids have been divided up
           xfine <- (xfine - 1) * shrink.x + 1
           yfine <- (yfine - 1) * shrink.y + 1
-          xfine <- xfine + floor((numpix.x / 4) * (xpart - 1)) #shift number to sub grid position
+          xfine <- xfine + floor((numpix.x / 4) * (xpart - 1)) # shift number to sub grid position
           yfine <- yfine + floor((numpix.y / 4) * (ypart - 1))
           xfine <- xfine:(xfine + shrink.x - 1)
           yfine <- yfine:(yfine + shrink.y - 1)
         }
-        #cut out areas which are not in fine grid
+        # cut out areas which are not in fine grid
         xfine <- xfine[xfine <= numpix.x]
         yfine <- yfine[yfine <= numpix.y]
-        #get number of pixels (every combination if fine pixel indices)
+        # get number of pixels (every combination if fine pixel indices)
         npixfx <- length(xfine)
         npixfy <- length(yfine)
 
-        emissgrid[yfine, xfine] <- sum(influence[selunix]) / (npixfx * npixfy) #'dilute' influence over larger area of fine grid
+        emissgrid[yfine, xfine] <- sum(influence[selunix]) / (npixfx * npixfy) #' dilute' influence over larger area of fine grid
       } # for each gridcell...
 
-      emissgrid.all <- emissgrid.all + emissgrid / npar #uses number of particles used to determine footprint
-    } #for different emissname
+      emissgrid.all <- emissgrid.all + emissgrid / npar # uses number of particles used to determine footprint
+    } # for different emissname
 
-    #JCL(5/23/2004)------- not normalize by 'foottimes',b/c want TIME-INTEGRATED footprint----------------#
-    #foot.arr[,,foottimespos]<-emissgrid.all/(foottimes[foottimespos+1]-foottimes[foottimespos])
-    #JCL(5/23/2004)------- not normalize by 'foottimes',b/c want TIME-INTEGRATED footprint----------------#
-    foot.arr[,, foottimespos] <- emissgrid.all
-  } #loop over time intervals
+    # JCL(5/23/2004)------- not normalize by 'foottimes',b/c want TIME-INTEGRATED footprint----------------#
+    # foot.arr[,,foottimespos]<-emissgrid.all/(foottimes[foottimespos+1]-foottimes[foottimespos])
+    # JCL(5/23/2004)------- not normalize by 'foottimes',b/c want TIME-INTEGRATED footprint----------------#
+    foot.arr[, , foottimespos] <- emissgrid.all
+  } # loop over time intervals
 
-  #For horizontal grids (lower left corner of south-west gridcell: 11N,145W; resolution: 1/4 lon, 1/6 lat, 376 (x) times 324 (y))
+  # For horizontal grids (lower left corner of south-west gridcell: 11N,145W; resolution: 1/4 lon, 1/6 lat, 376 (x) times 324 (y))
   dimnames(foot.arr) <- list(lats, lons, foottimes[1:(length(foottimes) - 1)])
   return(foot.arr)
 }
@@ -821,7 +821,7 @@ obs_normalize_dmass <- function(part = NULL) {
   # must be in this order (might not be...)
   # this is from lower time to bigger time by part index
   # index from first to last repeating btime
-  data.table::setorderv(part, c("btime", "index")) #data.table
+  data.table::setorderv(part, c("btime", "index")) # data.table
 
   # Identify and remove particles with too strong dmass violation
   # `[.data.table` can be used to subset efficiently

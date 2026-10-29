@@ -80,56 +80,56 @@
 #' }
 #
 obs_hysplit_control <- function(
-  df,
-  year,
-  month,
-  day,
-  hour,
-  minute,
-  lat,
-  lon,
-  alt,
-  start_time = NULL,
-  nlocations = 1,
-  duration = -240,
-  vertical_motion = 5,
-  top_model_domain = 10000,
-  met = c("hrrr", "nams", "gfs0p25"),
-  nmet = abs(duration / 24) + 1, # 10 days plus 1, defaultdays
-  metpath = c(
-    "/work/noaa/lpdm/metfiles/hrrr/",
-    "/work/noaa/lpdm/metfiles/nams/",
-    "/work/noaa/lpdm/metfiles/gfs0p25/"
-  ),
-  metformat = c(
-    hrrr = "%Y%m%d_hrrr",
-    nams = "%Y%m%d_hysplit.t00z.namsa",
-    gfs0p25 = "%Y%m%d_gfs0p25",
-    era5 = "ERA5_%Y%m%d.ARL"
-  ),
-  ngases = 1,
-  gas = "Foot",
-  emissions_rate = 0,
-  hour_emissions = 0.01,
-  release_start = NULL,
-  nsim_grids = 1,
-  center_conc_grids = c(0, 0),
-  grid_spacing = c(0.1, 0.1),
-  grid_span = c(30, 30),
-  nconc = "cdump",
-  nvert_levels = 1,
-  height_vert_levels = 50,
-  sampling_start_time = c(0, 0, 0, 0, 0),
-  sampling_end_time = c(0, 0, 0, 0, 0),
-  sampling_interval_type = c(0, abs(duration), 0),
-  npol_depositing = 1,
-  particle_params = c(0, 0, 0),
-  dmwsrdre = c(0, 0, 0, 0, 0),
-  wrhcicbc = c(0, 0, 0),
-  radiactive_decay = 0,
-  pol_res = 0,
-  control = "CONTROL",
-  verbose = FALSE
+                                df,
+                                year,
+                                month,
+                                day,
+                                hour,
+                                minute,
+                                lat,
+                                lon,
+                                alt,
+                                start_time = NULL,
+                                nlocations = 1,
+                                duration = -240,
+                                vertical_motion = 5,
+                                top_model_domain = 10000,
+                                met = c("hrrr", "nams", "gfs0p25"),
+                                nmet = abs(duration / 24) + 1, # 10 days plus 1, defaultdays
+                                metpath = c(
+                                  "/work/noaa/lpdm/metfiles/hrrr/",
+                                  "/work/noaa/lpdm/metfiles/nams/",
+                                  "/work/noaa/lpdm/metfiles/gfs0p25/"
+                                ),
+                                metformat = c(
+                                  hrrr = "%Y%m%d_hrrr",
+                                  nams = "%Y%m%d_hysplit.t00z.namsa",
+                                  gfs0p25 = "%Y%m%d_gfs0p25",
+                                  era5 = "ERA5_%Y%m%d.ARL"
+                                ),
+                                ngases = 1,
+                                gas = "Foot",
+                                emissions_rate = 0,
+                                hour_emissions = 0.01,
+                                release_start = NULL,
+                                nsim_grids = 1,
+                                center_conc_grids = c(0, 0),
+                                grid_spacing = c(0.1, 0.1),
+                                grid_span = c(30, 30),
+                                nconc = "cdump",
+                                nvert_levels = 1,
+                                height_vert_levels = 50,
+                                sampling_start_time = c(0, 0, 0, 0, 0),
+                                sampling_end_time = c(0, 0, 0, 0, 0),
+                                sampling_interval_type = c(0, abs(duration), 0),
+                                npol_depositing = 1,
+                                particle_params = c(0, 0, 0),
+                                dmwsrdre = c(0, 0, 0, 0, 0),
+                                wrhcicbc = c(0, 0, 0),
+                                radiactive_decay = 0,
+                                pol_res = 0,
+                                control = "CONTROL",
+                                verbose = FALSE
 ) {
   if (!missing(df)) {
     if (
@@ -152,9 +152,9 @@ obs_hysplit_control <- function(
     lon <- df$longitude
     agl <- df$altitude
 
-    lat <- sprintf(lat, fmt = '%#.4f')
+    lat <- sprintf(lat, fmt = "%#.4f")
 
-    lon <- sprintf(lon, fmt = '%#.4f')
+    lon <- sprintf(lon, fmt = "%#.4f")
 
     yr <- df$year
     mo <- df$month
@@ -163,9 +163,9 @@ obs_hysplit_control <- function(
     mi <- df$minute
   } else {
     # lat lon height
-    lat <- sprintf(lat, fmt = '%#.4f')
+    lat <- sprintf(lat, fmt = "%#.4f")
 
-    lon <- sprintf(lon, fmt = '%#.4f')
+    lon <- sprintf(lon, fmt = "%#.4f")
 
     yr <- year
     mo <- month
@@ -182,11 +182,11 @@ obs_hysplit_control <- function(
   }
 
   rel_start <- paste(
-    substr(yr, 3, 4), #I need to confirm
-    sprintf(mo, fmt = '%02d'),
-    sprintf(dy, fmt = '%02d'),
-    sprintf(ho, fmt = '%02d'),
-    sprintf(mi, fmt = '%02d')
+    substr(yr, 3, 4), # I need to confirm
+    sprintf(mo, fmt = "%02d"),
+    sprintf(dy, fmt = "%02d"),
+    sprintf(ho, fmt = "%02d"),
+    sprintf(mi, fmt = "%02d")
   )
 
   if (verbose) {
@@ -451,41 +451,41 @@ obs_hysplit_control <- function(
 #' }
 #
 obs_hysplit_setup <- function(
-  idsp = 2,
-  capemin = 500,
-  vscales = -1.0,
-  kbls = 1,
-  kblt = 5,
-  kmixd = 0,
-  initd = 0,
-  veght = 0.5,
-  kmix0 = 150,
-  numpar = 500,
-  maxpar = 500,
-  ichem = 8,
-  krand = 4,
-  varsiwant = c(
-    'time',
-    'indx',
-    'lati',
-    'long',
-    'zagl',
-    'zsfc',
-    'foot',
-    'samt',
-    'temp',
-    'dswf',
-    'mlht',
-    'dens',
-    'dmas',
-    'sigw',
-    'tlgr'
-  ),
-  ivmax = length(varsiwant),
-  outdt = 15,
-  extra_params,
-  bypass_params,
-  setup = "SETUP.CFG"
+                              idsp = 2,
+                              capemin = 500,
+                              vscales = -1.0,
+                              kbls = 1,
+                              kblt = 5,
+                              kmixd = 0,
+                              initd = 0,
+                              veght = 0.5,
+                              kmix0 = 150,
+                              numpar = 500,
+                              maxpar = 500,
+                              ichem = 8,
+                              krand = 4,
+                              varsiwant = c(
+                                "time",
+                                "indx",
+                                "lati",
+                                "long",
+                                "zagl",
+                                "zsfc",
+                                "foot",
+                                "samt",
+                                "temp",
+                                "dswf",
+                                "mlht",
+                                "dens",
+                                "dmas",
+                                "sigw",
+                                "tlgr"
+                              ),
+                              ivmax = length(varsiwant),
+                              outdt = 15,
+                              extra_params,
+                              bypass_params,
+                              setup = "SETUP.CFG"
 ) {
   # start
   write("&SETUP", file = setup)
@@ -638,13 +638,13 @@ obs_hysplit_setup <- function(
 #' }
 #
 obs_hysplit_ascdata <- function(
-  llc = c(-90.0, -180.0),
-  spacing = c(1.0, 1.0),
-  n = c(180, 360),
-  landusecat = 2,
-  rough = 0.2,
-  bdyfiles = '../bdyfiles/',
-  ascdata = "ASCDATA.CFG"
+                                llc = c(-90.0, -180.0),
+                                spacing = c(1.0, 1.0),
+                                n = c(180, 360),
+                                landusecat = 2,
+                                rough = 0.2,
+                                bdyfiles = "../bdyfiles/",
+                                ascdata = "ASCDATA.CFG"
 ) {
   sink(ascdata)
 
@@ -707,7 +707,7 @@ obs_hysplit_ascdata <- function(
 #'
 #' }
 obs_hysplit_control_read <- function(
-  control = "CONTROL"
+                                     control = "CONTROL"
 ) {
   # null arguments for check
   time <- dt <- lat <- lon <- alt <- ident <- id <- NULL

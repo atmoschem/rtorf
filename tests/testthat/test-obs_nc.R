@@ -8,7 +8,7 @@ make_args <- function(nlat = 3L, nlon = 4L, ntime = 2L) {
   lat      <- seq(30, 32, length.out = nlat)
   lon      <- seq(-100, -97, length.out = nlon)
   time_nc  <- ISOdatetime(2020, 1, 1, 0, 0, 0, tz = "UTC") +
-               (seq_len(ntime) - 1L) * 3600
+    (seq_len(ntime) - 1L) * 3600
   arr      <- array(seq_len(nlat * nlon * ntime), dim = c(nlon, nlat, ntime))
   list(lat = lat, lon = lon, time_nc = time_nc, arr = arr)
 }
@@ -420,7 +420,9 @@ test_that("obs_nc_get stops when nc_lon has length > 1", {
 # then read dimension values back via ncdf4 directly.
 
 test_that("obs_nc round-trip: all dimension sizes match inputs", {
-  nlat <- 4L; nlon <- 5L; ntime <- 3L
+  nlat <- 4L
+  nlon <- 5L
+  ntime <- 3L
   a    <- make_args(nlat = nlat, nlon = nlon, ntime = ntime)
   tmp  <- tempfile(fileext = ".nc")
   on.exit(unlink(tmp))
